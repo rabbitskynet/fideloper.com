@@ -1,16 +1,42 @@
 <?php
 
-class UserTableSeeder extends Seeder {
+class ArticleTagSeed extends Seeder {
 
     public function run()
     {
-        DB::table('articles_tags')->delete();
+        DB::table('tags_articles')->delete();
 
-        ArticleTag::create(array(
-            'email' => 'your@email.com',
-            'password' => Hash::make('your_password'),
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime
+        // Articles: 1,2,3
+        // Tags: 1,2,3
+        
+        // Article 1
+        TagArticle::create(array(
+            'tag_id' => 1,
+            'article_id' => 1,
+        ));
+        TagArticle::create(array(
+            'tag_id' => 2,
+            'article_id' => 1,
+        ));
+
+        // Article 2
+        TagArticle::create(array(
+            'tag_id' => 3,
+            'article_id' => 2,
+        ));
+
+        // Article 3
+        TagArticle::create(array(
+            'tag_id' => 1,
+            'article_id' => 3,
+        ));
+        TagArticle::create(array(
+            'tag_id' => 2,
+            'article_id' => 3,
+        ));
+        TagArticle::create(array(
+            'tag_id' => 3,
+            'article_id' => 3,
         ));
     }
 }

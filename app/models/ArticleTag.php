@@ -1,12 +1,12 @@
 <?php
 
-class ArticleTag extends Eloquent {
+class TagArticle extends Eloquent {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'articles_tags';
+    protected $table = 'tags_articles';
 
 }
