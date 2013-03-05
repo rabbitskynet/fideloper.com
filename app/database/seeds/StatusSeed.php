@@ -1,6 +1,6 @@
 <?php
 
-class UserTableSeeder extends Seeder {
+class StatusSeed extends Seeder {
 
     public function run()
     {

@@ -9,7 +9,14 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		// $this->call('UserTableSeeder');
+		// No relationships columns
+        $this->call('UserSeed');
+        $this->call('StatusSeed');
+        $this->call('TagSeed');
+        
+        // Has relationship columns
+        $this->call('ArticleSeed');
+        $this->call('ArticleTagSeed');
 	}
 
 }
