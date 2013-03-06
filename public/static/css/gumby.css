@@ -5631,11 +5631,17 @@ h6 a:hover {
 }
 
 header h1,
+h1.header,
 header h2,
+h2.header,
 header h3,
+h3.header,
 header h4,
+h4.header,
 header h5,
-header h6 {
+h5.header,
+header h6,
+h6.header {
   font-weight: 200;
 }
 
@@ -5709,19 +5715,34 @@ body {
   line-height: 20px;
 }
 
+#gsidebar li.title {
+  text-transform: none;
+  border: none;
+  padding-bottom: 0;
+}
+
+#gsidebar li.first {
+  border: none;
+}
+
 aside ul {
   margin-top: 18px;
 }
 
 .archive li {
+  border-top: 1px dotted #cccccc;
+  padding: 12px 0 12px 30px;
   position: relative;
-  padding-left: 30px;
+}
+
+.archive li:first-child {
+  border-top: none;
 }
 
 .archive li i {
   position: absolute;
   left: 0;
-  top: 0;
+  top: 12px;
 }
 
 .whoami {
@@ -5768,6 +5789,10 @@ aside ul {
     float: left;
     margin-right: 12px;
     line-height: 26px;
+  }
+
+  aside ul {
+    margin-top: 0;
   }
 }
 .post pre {
