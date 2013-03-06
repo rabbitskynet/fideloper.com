@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/admin">Performant</a>
+          <a class="brand" href="/admin">Fideloper.com</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="@if( strpos(Request::path(), 'admin/user') !== FALSE )active@endif"><a href="/admin/user">Users</a></li>

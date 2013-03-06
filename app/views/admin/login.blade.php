@@ -1,6 +1,6 @@
     <div class="container">
 
-      <form class="form-signin form-horizontal" method="post" action="/login">
+      <form class="form-signin form-horizontal" method="post" action="/admin/login">
         <h2 class="">Please sign in</h2>
         @if ( isset($auth_error) )
         <p>{{ $auth_error }}</p>

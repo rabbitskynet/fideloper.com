@@ -18,6 +18,25 @@ Route::get('/', function()
 
 Route::group(array('prefix' => 'admin'), function()
 {
+    Route::get('/login', function()
+    {
+        return View::make('admin.login');
+    });
+
+    Route::post('/login', function()
+    {
+        //Test authentication
+        $authenticated = Auth::attempt( ['email' => Input::get('email'), 'password' => Input::get('password')] );
+        if ( $authenticated )
+        {
+            // Logged in!
+            return Redirect::to('/admin');
+        } else {
+            // Incorrect Login
+            return Redirect::to('/admin/login')->with('auth_error', 'Username or Password Incorrect');
+        }
+    });
+
     Route::resource('/', 'AdminController');
     Route::resource('article', 'ArticleController');
     Route::resource('user', 'UserController');

@@ -2,6 +2,13 @@
 
 class AdminController extends BaseController {
 
+	public $layout = 'layouts.admin';
+
+	public function __construct()
+	{
+		$this->beforeFilter('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,68 +16,17 @@ class AdminController extends BaseController {
 	 */
 	public function index()
 	{
-		//
-		return 'hi';
+		$user = Auth::user();
+
+		return View::make('layouts.admin')
+			->with('body_class', 'admin')
+			->nest('nav', 'layouts.admin.nav')
+			->nest('content', 'admin.index');
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
+	public function login()
 	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
+		return 'login';
 	}
 
 }
