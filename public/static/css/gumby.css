@@ -5630,6 +5630,15 @@ h6 a:hover {
   color: #4ea3d0;
 }
 
+header h1,
+header h2,
+header h3,
+header h4,
+header h5,
+header h6 {
+  font-weight: 200;
+}
+
 .badge.primary,
 .label.primary {
   background: #4ea3d0;
@@ -5641,6 +5650,10 @@ body {
 
 #brand h1 {
   font-size: 1.5rem;
+}
+
+.single h2 {
+  font-weight: 800;
 }
 
 .listing h3 a {
@@ -5694,6 +5707,21 @@ body {
   text-transform: uppercase;
   font-size: .9rem;
   line-height: 20px;
+}
+
+aside ul {
+  margin-top: 18px;
+}
+
+.archive li {
+  position: relative;
+  padding-left: 30px;
+}
+
+.archive li i {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .whoami {
