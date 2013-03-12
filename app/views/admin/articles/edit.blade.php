@@ -44,7 +44,7 @@
 			<div class="controls">
 				<select name="user_id" id="user_id">
 					@foreach ( $authors as $author )
-					<option value="{{ $author->id }}" @if ( $author->id == $article->author->id ) selected @endif>{{ $author->email }}</option>
+					<option value="{{ $author->id }}" @if ( $author->id == $article->user->id ) selected @endif>{{ $author->email }}</option>
 					@endforeach
 				</select>
 				@if( isset($errors) && $errors->has('user_id') )
@@ -53,15 +53,16 @@
 			</div>
 			<!-- status -->
 		</div>
-		<div class="control-group @if( isset($errors) && $errors->has('status') )error@endif">
-			<label class="control-label" for="status">Status:</label>
+		<div class="control-group @if( isset($errors) && $errors->has('status_id') )error@endif">
+			<label class="control-label" for="status_id">Status:</label>
 			<div class="controls">
-				<select name="status" id="staus">
-					<option value="published" @if ( $article->status === 'published' ) selected @endif>Published</option>
-					<option value="draft" @if ( $article->status === 'draft' ) selected @endif>Draft</option>
+				<select name="status_id" id="status_id">
+					@foreach ( $statuses as $status )
+					<option value="{{ $status->id }}" @if ( (isset($input['status_id']) && $input['status_id'] == $status->id) || $article->status->id == $status->id) selected @endif>{{ $status->name }}</option>
+					@endforeach
 				</select>
-				@if( isset($errors) && $errors->has('status') )
-				<span class="help-inline">{{ $errors->first('status') }}</span>
+				@if( isset($errors) && $errors->has('status_id') )
+				<span class="help-inline">{{ $errors->first('status_id') }}</span>
 				@endif
 			</div>
 		</div>
@@ -76,6 +77,20 @@
 @endif">
 				@if( isset($errors) && $errors->has('created_at') )
 				<span class="help-inline">{{ $errors->first('created_at') }}</span>
+				@endif
+			</div>
+		</div>
+		<div class="control-group @if( isset($errors) && $errors->has('content') )error@endif">
+			<!-- excerpt -->
+			<label class="control-label" for="excerpt">Excerpt:</label>
+			<div class="controls">
+				<textarea id="excerpt" name="excerpt" placeholder="Excerpt">@if( isset($input['excerpt']) )
+{{ $input['excerpt'] }}
+@elseif( isset($article->excerpt) )
+{{ $article->excerpt }}
+@endif</textarea>
+				@if( isset($errors) && $errors->has('excerpt') )
+				<span class="help-inline">{{ $errors->first('excerpt') }}</span>
 				@endif
 			</div>
 		</div>

@@ -34,17 +34,18 @@
 				<span class="help-inline">{{ $errors->first('user_id') }}</span>
 				@endif
 			</div>
-			<!-- status -->
 		</div>
-		<div class="control-group @if( isset($errors) && $errors->has('status') )error@endif">
-			<label class="control-label" for="status">Status:</label>
+		<div class="control-group @if( isset($errors) && $errors->has('status_id') )error@endif">
+			<!-- status -->
+			<label class="control-label" for="status_id">Status:</label>
 			<div class="controls">
-				<select name="status" id="staus">
-					<option value="published" @if( isset($input['status']) && $input['status'] === 'published' ) selected @endif>Published</option>
-					<option value="draft" @if( (isset($input['status']) && $input['status'] === 'draft') || !isset($input['status']) ) selected @endif>Draft</option>
+				<select name="status_id" id="status_id">
+					@foreach ( $statuses as $status )
+					<option value="{{ $status->id }}" @if ( isset($input['status_id']) && $input['status_id'] == $status->id ) selected @endif>{{ $status->name }}</option>
+					@endforeach
 				</select>
-				@if( isset($errors) && $errors->has('status') )
-				<span class="help-inline">{{ $errors->first('status') }}</span>
+				@if( isset($errors) && $errors->has('status_id') )
+				<span class="help-inline">{{ $errors->first('status_id') }}</span>
 				@endif
 			</div>
 		</div>
@@ -55,6 +56,16 @@
 				<input type="text" id="created_at" name="created_at" placeholder="{{ date('m/d/Y H:i:s') }}" value="@if( isset($input['created_at']) ){{ $input['created_at'] }}@endif">
 				@if( isset($errors) && $errors->has('created_at') )
 				<span class="help-inline">{{ $errors->first('created_at') }}</span>
+				@endif
+			</div>
+		</div>
+		<div class="control-group @if( isset($errors) && $errors->has('content') )error@endif">
+			<!-- excerpt -->
+			<label class="control-label" for="excerpt">Excerpt:</label>
+			<div class="controls">
+				<textarea id="excerpt" name="excerpt" placeholder="Excerpt">@if( isset($input['excerpt']) ){{ $input['excerpt'] }}@endif</textarea>
+				@if( isset($errors) && $errors->has('excerpt') )
+				<span class="help-inline">{{ $errors->first('excerpt') }}</span>
 				@endif
 			</div>
 		</div>
