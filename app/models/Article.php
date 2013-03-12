@@ -11,17 +11,17 @@ class Article extends Eloquent {
 
     public function tags()
     {
-        $this->belongsToMany('Tag', 'tags_articles', 'tag_id', 'article_id');
+        return $this->belongsToMany('Tag', 'tags_articles', 'tag_id', 'article_id');
     }
 
     public function status()
     {
-        $this->hasOne('Status');
+        return $this->belongsTo('Status');
     }
 
     public function user()
     {
-        $this->belongsTo('User');
+        return $this->belongsTo('User');
     }
 
 }

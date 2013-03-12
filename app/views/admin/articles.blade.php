@@ -17,8 +17,8 @@
 			<tr>
 				<td>{{ $article->id }}</td>
 				<td><a href="/admin/article/{{ $article->id }}/edit">{{ $article->title }}</a></td>
-				<td><a href="/admin/user/{{ $article->author->id }}/edit">{{ $article->author->email }}</a></td>
-				<td>{{ $article->status }}</td>
+				<td><a href="/admin/user/{{ $article->user->id }}/edit">{{ $article->user->email }}</a></td>
+				<td>{{ $article->status->name }}</td>
 				<td>{{ $article->created_at }}</td>
 				<td>{{ $article->updated_at }}</td>
 			</tr>

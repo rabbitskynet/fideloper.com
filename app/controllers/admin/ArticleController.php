@@ -9,8 +9,12 @@ class ArticleController extends BaseController {
 	 */
 	public function index()
 	{
-		//
-		return 'article';
+		$articles = Article::with('user')->with('status')->get();
+
+		return View::make('layouts.admin')
+			->with('body_class', 'admin article')
+			->nest('nav', 'layouts.admin.nav')
+			->nest('content', 'admin.articles', ['articles' => $articles]);
 	}
 
 	/**
