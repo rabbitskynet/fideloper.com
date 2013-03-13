@@ -7,7 +7,8 @@
 			<div class="span12">
 				<h1>Edit Article</h1>
 			</div><!-- end .span12 -->
-		</div>
+		</div><!-- end .row -->
+
 		<div class="row">
 			<div class="span9 article-editable">
 				@if ( isset($errors) && $errors->has('general') )
