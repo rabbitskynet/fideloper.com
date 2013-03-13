@@ -9,9 +9,9 @@ class Status extends Eloquent {
      */
     protected $table = 'statuses';
 
-    public function article()
+    public function articles()
     {
-        return $this->belongsTo('Article');
+        return $this->hasMany('Article');
     }
 
 }
