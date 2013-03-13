@@ -44,3 +44,13 @@ body.login {
 .form-signin.form-horizontal .controls {
 	margin-left: 80px;
 }
+.article-editable input,
+.article-editable textarea {
+    width: 97%;
+}
+#excerpt {
+    height: 100px;
+}
+#content {
+    height: 300px;
+}
