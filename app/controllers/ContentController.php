@@ -2,14 +2,21 @@
 
 class ContentController extends BaseController {
 
-	 protected $layout = 'layouts.site';
+	protected $layout = 'layouts.site';
+
+	protected $article;
+
+	public function __construct(Fideloper\Storage\Article\ArticleInterface $article)
+	{
+		$this->article = $article;
+	}
 
 	/**
 	* Display listing of latest articles
 	*/
 	public function index()
 	{	
-		$articles = Article::paginate(10);
+		$articles = $this->article->getPaginated();
 
 		$this->layout->content = View::make('content.home')->with('articles', $articles);
 	}
@@ -19,7 +26,7 @@ class ContentController extends BaseController {
 	*/
 	public function article($slug)
 	{
-		$article = Article::where('url_title', $slug)->first();
+		$article = $this->article->getBySlug($slug);
 
 		if( !$article )
 		{

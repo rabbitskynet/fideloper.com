@@ -111,6 +111,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+		'Fideloper\Storage\StorageServiceProvider',
+
 		'ExpressiveDateServiceProvider',
 	),
 
