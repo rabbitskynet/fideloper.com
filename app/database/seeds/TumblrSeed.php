@@ -36,72 +36,161 @@ class TumblrSeed extends Seeder {
             $articles[] = $article;
         }
 
-
-
+        // Roll through each article
         foreach( $articles as $article )
         {
+            if ( $article->state !== "published" )
+            {
+                continue;
+            }
+
            switch($article->type)
            {
                 case 'link' :
+                    $this->createLink($article);
                     break;
                 case 'photo' :
+                    $this->createPhoto($article);
                     break;
                 case 'text' :
                 default :
+                    if( $article->title === "" ) { continue; } // This happened somehow, but on a worthless post
+                    $this->createText($article);
                     break;
            }
         }
 
-        /*
-
-        Article::create(array(
-            'user_id' => 1,
-            'status_id' => 1, // Published
-            'title' => 'This is my first article!',
-            'url_title' => 'my_first_article',
-            'excerpt' => 'This is the explaining to my first article here and there.',
-            'content' => "This should be really long, and contain markdown. And be properly filtered. That's hard stuff!",
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime
-        ));
-
-        Article::create(array(
-            'user_id' => 1,
-            'status_id' => 1, // Published
-            'title' => 'This is my second article!',
-            'url_title' => 'my_second_article',
-            'excerpt' => 'This is the explaining to my first article here and there.',
-            'content' => "This should be really long, and contain markdown. And be properly filtered. That's hard stuff!",
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime
-        ));
-
-        Article::create(array(
-            'user_id' => 1,
-            'status_id' => 1, // Published
-            'title' => 'This is my third article!',
-            'url_title' => 'my_third_article',
-            'excerpt' => 'This is the explaining to my first article here and there.',
-            'content' => "This should be really long, and contain markdown. And be properly filtered. That's hard stuff!",
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime
-        ));
-
-        */
     }
 
     protected function createText($article)
-    {
+    {   
+        $createdAt = new DateTime('@'.$article->timestamp);
 
+        $newArticle = Article::create(array(
+            'user_id' => 1,
+            'status_id' => 1,
+            'title' => $article->title,
+            'url_title' => $article->slug,
+            'excerpt' => $this->generateExcerpt($article->body),
+            'content' => $article->body,
+            'created_at' => $createdAt,
+            'updated_at' => new DateTime // Import date
+        ));
+
+        // Update the date, since Article::create() ignores the set DateTime
+        DB::table('articles')->where('url_title', $article->slug)->update([ 'created_at' => $createdAt->format( Article::getDateFormat() ) ]);
+
+        // Add tags
+        foreach ( $article->tags as $tag )
+        {
+            $this->addTag($newArticle->id, $tag);
+        }
     }
 
     protected function createLink($article)
-    {
+    {   
+        $createdAt = new DateTime('@'.$article->timestamp);
 
+        $newArticle = Article::create(array(
+            'user_id' => 1,
+            'status_id' => 1,
+            'title' => $article->title,
+            'url_title' => $article->slug,
+            'excerpt' => "[{$article->url}]({$article->url})",
+            'content' => "[{$article->url}]({$article->url})",
+            'created_at' => $createdAt,
+            'updated_at' => new DateTime
+        ));
+
+        // Update the date, since Article::create() ignores the set DateTime
+        DB::table('articles')->where('url_title', $article->slug)->update([ 'created_at' => $createdAt->format( Article::getDateFormat() ) ]);
+
+        // Add tags
+        foreach ( $article->tags as $tag )
+        {
+            $this->addTag($newArticle->id, $tag);
+        }
     }
 
     protected function createPhoto($article)
-    {
+    {   
+        $createdAt = new DateTime('@'.$article->timestamp);
 
+        $newArticle = Article::create(array(
+            'user_id' => 1,
+            'status_id' => 1,
+            'title' => 'A Photo',
+            'url_title' => $article->id.'-'.$article->slug,
+            'excerpt' => $this->generateExcerpt($article->caption),
+            'content' => $article->caption,
+            'created_at' => $createdAt,
+            'updated_at' => new DateTime
+        ));
+
+        // Update the date, since Article::create() ignores the set DateTime
+        DB::table('articles')->where('url_title', $article->slug)->update([ 'created_at' => $createdAt->format( Article::getDateFormat() ) ]);
+
+        // Add tags
+        foreach ( $article->tags as $tag )
+        {
+            $this->addTag($newArticle->id, $tag);
+        }
+    }
+
+    protected function generateExcerpt($content)
+    {
+        $firstParagrah = strpos($content, "\n");
+
+        if ( $firstParagrah !== FALSE )
+        {
+            $excerpt = substr($content, 0, $firstParagrah);
+        } else
+        {
+            // Sucks but "works"
+            $words = explode(' ', $content);
+
+            $wordcount = 0;
+            $excerpt = '';
+
+            while($wordcount < 49)
+            {
+                if( isset($words[$wordcount]) )
+                {
+                    $excerpt .= $words[$wordcount];
+                }
+                $wordcount ++;
+            }
+        }
+
+        return $excerpt;
+    }
+
+    protected function addTag($article_id, $tag)
+    {
+        $foundTag = Tag::where('name', $tag)->first();
+
+        if( count($foundTag) === 0 )
+        {
+            // Create Tag
+            $foundTag = Tag::create(array(
+                'name' => $tag,
+                'url_name' => $this->urlFriendly($tag),
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime
+            ));
+        }
+
+        // Add relationship
+        TagArticle::create(array(
+            'tag_id' => $foundTag->id,
+            'article_id' => $article_id
+        ));
+
+            
+    }
+
+    protected function urlFriendly($string)
+    {
+        return str_replace(' ', '-', strtolower( trim($string) ) );
     }
 }

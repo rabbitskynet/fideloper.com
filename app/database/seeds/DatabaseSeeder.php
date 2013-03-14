@@ -9,14 +9,15 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		// No relationships columns
+        // No relationships columns
         $this->call('UserSeed');
         $this->call('StatusSeed');
-        $this->call('TagSeed');
-        
+        //$this->call('TagSeed');
+
         // Has relationship columns
-        $this->call('ArticleSeed');
-        $this->call('ArticleTagSeed');
+        $this->call('TumblrSeed');      # Handles Articles, Tags and Article-Tag relationship
+        //$this->call('ArticleSeed');
+        //$this->call('ArticleTagSeed');
 	}
 
 }
