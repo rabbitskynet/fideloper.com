@@ -12,7 +12,7 @@
 <article class="twelve columns post single">
   <div class="row">
     <aside class="meta four columns clearfix">
-      <time>{{ $article->created_at }}</time>
+      <time>{{ ExpressiveDate::make($article->created_at)->getRelativeDate() }}</time>
       <ul>
         @foreach( $article->tags as $tag )
         <li><a href="#"><span>#</span>{{ $tag->name }}</a></li>
@@ -22,7 +22,7 @@
 
     <div class="content twelve columns">
         <h2 class="title">{{ $article->title }}</h2>
-        {{ $article->content }}
+        {{ \Michelf\MarkdownExtra::defaultTransform($article->content) }}
     </div><!-- end content -->
   </div>
 </article><!-- end article -->

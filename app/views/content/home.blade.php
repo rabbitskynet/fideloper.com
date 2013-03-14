@@ -5,7 +5,7 @@
   @foreach( $articles as $article )
   <article class="post">
     <h3><a href="/{{ $article->url_title }}">{{ $article->title }}</a></h3>
-    {{ $article->excerpt }}
+    {{ \Michelf\MarkdownExtra::defaultTransform($article->excerpt) }}
   </article><!-- end article -->
   @endforeach
 
