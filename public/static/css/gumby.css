@@ -5766,8 +5766,16 @@ aside ul {
   padding-top: 30px;
 }
 
-.listing .pagi {
+.listing .pagination {
   margin: 50px 0;
+}
+
+.listing .pagination li {
+  margin-right: 4px;
+}
+
+.pagination .badge.light a {
+  color: #555555;
 }
 
 @media only screen and (max-width: 768px) {
