@@ -9,7 +9,7 @@ class ContentController extends BaseController {
 	*/
 	public function index()
 	{	
-		$articles = Article::all();
+		$articles = Article::paginate(10);
 
 		$this->layout->content = View::make('content.home')->with('articles', $articles);
 	}

@@ -11,7 +11,7 @@ class Article extends Eloquent {
 
     public function tags()
     {
-        return $this->belongsToMany('Tag', 'tags_articles', 'tag_id', 'article_id');
+        return $this->belongsToMany('Tag', 'tags_articles', 'article_id', 'tag_id');
     }
 
     public function status()
