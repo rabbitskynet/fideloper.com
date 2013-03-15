@@ -31,6 +31,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
+  <link type="text/plain" rel="author" href="http://fideloper.com/humans.txt" />
+
   <link rel="stylesheet" href="/static/css/gumby.css">
   <script src="/static/js/libs/modernizr-2.0.6.min.js"></script>
 </head>
