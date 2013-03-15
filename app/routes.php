@@ -50,6 +50,28 @@ Route::get('/post/{id}/{slug}', function($id, $slug) {
 
 })->where('id','[0-9]+')->where('slug', '[A-Za-z\-0-9]+');
 
+/**
+* Sitemap.xml
+*
+* @todo cacheing
+*/
+Route::get('/sitemap.xml', function() {
+    
+    // Grab all artiles for xml generation
+    $articles = DB::table('articles')->select('title', 'url_title', 'updated_at')->orderBy('created_at', 'asc')->get();
+
+    // Grab latest updated article for 'last modified'
+    $latest = DB::table('articles')->select('updated_at')->orderBy('updated_at', 'desc')->first();
+
+    // Get XML
+    $content = View::make('sitemap')
+                ->with('articles', $articles)
+                ->with('latest', $latest);
+
+    // Respond with proper content type
+    return Response::make($content, 200, ['Content-Type' => 'text/xml']);
+});
+
 
 /**
 * Blog content routing
