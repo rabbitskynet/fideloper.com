@@ -27,14 +27,17 @@ class ContentController extends BaseController {
 	public function article($slug)
 	{
 		$article = $this->article->getBySlug($slug);
+		$recents = $this->article->getRecent();
 
 		if( !$article )
 		{
 			App::abort(404);
 		}
 
-		$this->layout->content = View::make('content.article')
-			 ->with('article', $article);
+		$this->layout->content = View::make('content.article', [
+			'article' => $article,
+			'recents' => $recents
+		]);
 	}
 
 	/**
@@ -42,7 +45,17 @@ class ContentController extends BaseController {
 	*/
 	public function tag($tag)
 	{
-		return $tag;
+		$articles = $this->article->getByTag($tag);
+
+		if( count($articles) === 0 )
+		{
+			App::abort(404);
+		}
+
+		$this->layout->content = View::make('content.tags', [
+			'articles' => $articles,
+			'tag' => $tag
+		]);
 	}
 
 	/**

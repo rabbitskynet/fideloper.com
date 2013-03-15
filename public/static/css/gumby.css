@@ -5700,7 +5700,8 @@ body {
   line-height: 14px;
 }
 
-.meta a span {
+.meta a span,
+.tag header h2 span {
   color: #444444;
 }
 

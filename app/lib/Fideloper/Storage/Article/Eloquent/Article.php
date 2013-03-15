@@ -14,27 +14,31 @@ class Article implements ArticleInterface {
 
     }
 
-    public function getRecent($limit=3) {
-
+    public function getRecent($limit=3)
+    {
         return $this->article->orderBy('created_at', 'desc')
                            ->take(3)
                            ->get();
-
     }
 
     public function getPaginated($limit=10)
     {
-        return $this->article->paginate($limit);
+        return $this->article->orderBy('created_at', 'desc')->paginate($limit);
     }
 
     public function getBySlug($slug)
     {
-        return $this->article->where('url_title', $slug)->first();
+        return $this->article->with('tags')->where('url_title', $slug)->first();
     }
 
     public function getByTag($tag)
     {
-        $foundTag = $this->tag->with('articles')->where('name', $tag)->first();
+        $foundTag = $this->tag->with('articles')->where('url_name', $tag)->first();
+
+        if( !$foundTag )
+        {
+            return [];
+        }
 
         return $foundTag->articles;
     }
