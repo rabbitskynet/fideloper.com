@@ -12,7 +12,7 @@ class Tag extends Eloquent {
     public function articles()
     {   
         // Probably shouldbe hasMany
-        return $this->belongsToMany('Article', 'tags_articles', 'article_id', 'tag_id');
+        return $this->belongsToMany('Article', 'tags_articles', 'tag_id', 'article_id');
     }
 
 }
