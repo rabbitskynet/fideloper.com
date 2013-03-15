@@ -29,6 +29,7 @@
   <meta itemprop="image" content="http://fideloper.com/fideloper.jpg">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
   <link rel="stylesheet" href="/static/css/gumby.css">
   <script src="/static/js/libs/modernizr-2.0.6.min.js"></script>
