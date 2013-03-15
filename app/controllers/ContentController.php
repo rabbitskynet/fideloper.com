@@ -19,6 +19,7 @@ class ContentController extends BaseController {
 		$articles = $this->article->getPaginated();
 
 		$this->layout->content = View::make('content.home')->with('articles', $articles);
+		$this->layout->header_meta = View::make('layouts.meta')->with('head', App::make('headdata'));
 	}
 
 	/**

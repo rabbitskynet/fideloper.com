@@ -9,24 +9,10 @@
   <meta charset="utf-8">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-  <title>Fideloper</title>
-  <meta name="description" content="" />
-  <meta name="keywords" content="" />
-  <meta name="author" content="humans.txt">
+  
+  @yield('header_meta')
 
   <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-
-  <!--Facebook Metadata /-->
-  <meta property="fb:page_id" content="" />
-  <meta property="og:image" content="http://fideloper.com/fideloper.jpg" />
-  <meta property="og:description" content=""/>
-  <meta property="og:title" content=""/>
-
-  <!--Google+ Metadata /-->
-  <meta itemprop="name" content="">
-  <meta itemprop="description" content="">
-  <meta itemprop="image" content="http://fideloper.com/fideloper.jpg">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -44,7 +30,7 @@
     <header class="row" id="gheader">
       <div class="four columns" id="brand">
         <h1><a href="/">Fideloper</a></h1>
-        <p class="whoami">Lead dev @digitalsurgeons. LAMP and Server. Open source.</p>
+        <p class="whoami">Lead dev @digitalsurgeons. I do LAMP, Laravel, Nodejs, Python, and lots of server stuff.</p>
       </div>
       <div class="four columns push_eight" id="avatar">
         <a href="/"><img src="/static/facebook.png" alt="" /></a>
