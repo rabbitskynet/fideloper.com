@@ -73,15 +73,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
 
-  <script src="/static/js/libs/gumby.js"></script>
-  <script src="/static/js/libs/ui/gumby.retina.js"></script>
-  <script src="/static/js/libs/ui/gumby.fixed.js"></script>
-  <script src="/static/js/libs/ui/gumby.skiplink.js"></script>
-  <script src="/static/js/libs/ui/gumby.toggleswitch.js"></script>
-  <script src="/static/js/libs/ui/gumby.checkbox.js"></script>
-  <script src="/static/js/libs/ui/gumby.radiobtn.js"></script>
-  <script src="/static/js/libs/ui/gumby.tabs.js"></script>
-  <script src="/static/js/libs/ui/jquery.validation.js"></script>
+  <script src="/static/js/libs/gumby.min.js"></script>
   <script src="/static/js/plugins.js"></script>
   <script src="/static/js/main.js"></script>
   <!-- end scripts-->
