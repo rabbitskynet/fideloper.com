@@ -8,8 +8,6 @@
 <head>
   <meta charset="utf-8">
 
-  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
-       More info: h5bp.com/b/378 -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
   <title>Fideloper</title>
@@ -17,27 +15,22 @@
   <meta name="keywords" content="" />
   <meta name="author" content="humans.txt">
 
-  <link rel="shortcut icon" href="/static/favicon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
 
   <!--Facebook Metadata /-->
   <meta property="fb:page_id" content="" />
-  <meta property="og:image" content="" />
+  <meta property="og:image" content="http://fideloper.com/fideloper.jpg" />
   <meta property="og:description" content=""/>
   <meta property="og:title" content=""/>
 
   <!--Google+ Metadata /-->
   <meta itemprop="name" content="">
   <meta itemprop="description" content="">
-  <meta itemprop="image" content="">
+  <meta itemprop="image" content="http://fideloper.com/fideloper.jpg">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <link rel="stylesheet" href="/static/css/gumby.css">
-  <!--
-  We highly recommend you use SASS and write your custom styles in sass/_custom.scss.
-  However, there is a blank style.css in the css directory should you prefer
-  <link rel="stylesheet" href="css/style.css">
-  -->
   <script src="/static/js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
@@ -131,7 +124,9 @@
   <![endif]-->
 
   <!-- Social Widget Rendering Javascript /-->
+  
   <script src="http://platform.twitter.com/widgets.js"></script>
+  <?php /* Don't need these yet
   <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
   <script type="text/javascript">
     (function() {
@@ -140,6 +135,7 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
     })();
   </script>
+  */ ?>
   <!-- End Social Widget Rendering Javascript /-->
   @show
 </body>
