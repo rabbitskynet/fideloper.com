@@ -11,6 +11,9 @@
 |
 */
 
+/**
+* Routing for Admin Area
+*/
 Route::group(array('prefix' => 'admin'), function()
 {
     Route::get('/login', function()
@@ -37,6 +40,20 @@ Route::group(array('prefix' => 'admin'), function()
     Route::resource('user', 'UserController');
 });
 
+
+/**
+* Routing to handle 301 redirects from Tumblr URLs
+*/
+Route::get('/post/{id}/{slug}', function($id, $slug) {
+
+    return Redirect::to('/'.$slug, 301);
+
+})->where('id','[0-9]+')->where('slug', '[A-Za-z\-0-9]+');
+
+
+/**
+* Blog content routing
+*/
 Route::get('/', 'ContentController@index');
 Route::get('/tag/{tag}', 'ContentController@tag');
 Route::get('/archive/{date}', 'ContentController@archive');
