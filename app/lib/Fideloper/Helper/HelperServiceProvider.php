@@ -12,7 +12,7 @@ class HelperServiceProvider extends ServiceProvider {
     public function register()
     {
 
-        $this->app['headdata'] = $this->app->share(function($app)
+        $this->app->singleton('headdata', function($app)
         {
             return new Headdata([
                 'title' => 'Fideloper',

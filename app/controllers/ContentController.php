@@ -19,7 +19,6 @@ class ContentController extends BaseController {
 		$articles = $this->article->getPaginated();
 
 		$this->layout->content = View::make('content.home')->with('articles', $articles);
-		$this->layout->header_meta = View::make('layouts.meta')->with('head', App::make('headdata'));
 	}
 
 	/**
@@ -35,6 +34,18 @@ class ContentController extends BaseController {
 			App::abort(404);
 		}
 
+		// Head data
+		$tags = [];
+		foreach( $article->tags as $tag )
+		{
+			$tags[] = $tag->name;
+		}
+
+		$head = App::make('headdata');
+		$head->add('title', $article->title.' | Fideloper');
+		$head->add('keywords', implode(',', $tags));
+
+		// Output Article
 		$this->layout->content = View::make('content.article', [
 			'article' => $article,
 			'recents' => $recents
@@ -53,6 +64,11 @@ class ContentController extends BaseController {
 			App::abort(404);
 		}
 
+		// Head data
+		$head = App::make('headdata');
+		$head->add('title', $tag . ' | Fideloper');
+
+		// Output Articles
 		$this->layout->content = View::make('content.tags', [
 			'articles' => $articles,
 			'tag' => $tag
