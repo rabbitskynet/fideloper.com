@@ -9,4 +9,4 @@
   </article><!-- end article -->
   @endforeach
 </section>
-@stop        
+@stop

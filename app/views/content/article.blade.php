@@ -26,4 +26,4 @@
     </div><!-- end content -->
   </div>
 </article><!-- end article -->
-@stop            
+@stop

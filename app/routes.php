@@ -14,7 +14,11 @@
 /**
 * Routing for Admin Area
 */
-Route::group(array('prefix' => 'admin'), function()
+
+$adminEnv = getenv('ADMIN_URL');
+$adminGroup = ($adminEnv) ? $adminEnv : 'admin';
+
+Route::group(array('prefix' => $adminGroup), function()
 {
     Route::get('/login', function()
     {
@@ -56,7 +60,7 @@ Route::get('/post/{id}/{slug}', function($id, $slug) {
 * @todo cacheing
 */
 Route::get('/sitemap.xml', function() {
-    
+
     // Grab all artiles for xml generation
     $articles = DB::table('articles')->select('title', 'url_title', 'updated_at')->orderBy('created_at', 'asc')->get();
 
