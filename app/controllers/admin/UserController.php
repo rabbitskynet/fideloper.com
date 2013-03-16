@@ -9,8 +9,12 @@ class UserController extends BaseController {
 	 */
 	public function index()
 	{
-		//
-		return 'user';
+		$users = User::all();
+
+		return View::make('layouts.admin')
+			->with('body_class', 'admin article')
+			->nest('nav', 'layouts.admin.nav')
+			->nest('content', 'admin.users', ['users' => $users]);
 	}
 
 	/**

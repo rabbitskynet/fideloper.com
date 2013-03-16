@@ -11,14 +11,72 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
-
+/**
+* Routing for Admin Area
+*/
 Route::group(array('prefix' => 'admin'), function()
 {
+    Route::get('/login', function()
+    {
+        return View::make('admin.login');
+    });
+
+    Route::post('/login', function()
+    {
+        //Test authentication
+        $authenticated = Auth::attempt( ['email' => Input::get('email'), 'password' => Input::get('password')] );
+        if ( $authenticated )
+        {
+            // Logged in!
+            return Redirect::to('/admin');
+        } else {
+            // Incorrect Login
+            return Redirect::to('/admin/login')->with('auth_error', 'Username or Password Incorrect');
+        }
+    });
+
     Route::resource('/', 'AdminController');
     Route::resource('article', 'ArticleController');
     Route::resource('user', 'UserController');
 });
+
+
+/**
+* Routing to handle 301 redirects from Tumblr URLs
+*/
+Route::get('/post/{id}/{slug}', function($id, $slug) {
+
+    return Redirect::to('/'.$slug, 301);
+
+})->where('id','[0-9]+')->where('slug', '[A-Za-z\-0-9]+');
+
+/**
+* Sitemap.xml
+*
+* @todo cacheing
+*/
+Route::get('/sitemap.xml', function() {
+    
+    // Grab all artiles for xml generation
+    $articles = DB::table('articles')->select('title', 'url_title', 'updated_at')->orderBy('created_at', 'asc')->get();
+
+    // Grab latest updated article for 'last modified'
+    $latest = DB::table('articles')->select('updated_at')->orderBy('updated_at', 'desc')->first();
+
+    // Get XML
+    $content = View::make('sitemap')
+                ->with('articles', $articles)
+                ->with('latest', $latest);
+
+    // Respond with proper content type
+    return Response::make($content, 200, ['Content-Type' => 'text/xml']);
+});
+
+
+/**
+* Blog content routing
+*/
+Route::get('/', 'ContentController@index');
+Route::get('/tag/{tag}', 'ContentController@tag');
+Route::get('/archive/{date}', 'ContentController@archive');
+Route::get('/{slug}', 'ContentController@article');

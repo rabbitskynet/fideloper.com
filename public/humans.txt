@@ -1,0 +1,17 @@
+/* TEAM */
+
+Your title: Chris Fidao
+Site: fideloper [at] google's mail server
+Twitter: fideloper
+Location: New Haven, CT
+
+                         
+/* THANKS */
+Name: Digital Surgeons                      
+
+                            
+/* SITE */
+Last update: Continuously.
+Standards: HTML5, CSS3, Responsive
+Components: Gumby Framework, Modernizr, jQuery, Facebook, Twitter
+Software: I try not to leave such gaping security holes as information like this.

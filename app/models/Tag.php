@@ -10,8 +10,9 @@ class Tag extends Eloquent {
     protected $table = 'tags';
 
     public function articles()
-    {
-        $this->belongsToMany('Article', 'tags_articles', 'article_id', 'tag_id');
+    {   
+        // Probably shouldbe hasMany
+        return $this->belongsToMany('Article', 'tags_articles', 'tag_id', 'article_id');
     }
 
 }

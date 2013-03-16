@@ -5630,6 +5630,21 @@ h6 a:hover {
   color: #4ea3d0;
 }
 
+header h1,
+h1.header,
+header h2,
+h2.header,
+header h3,
+h3.header,
+header h4,
+h4.header,
+header h5,
+h5.header,
+header h6,
+h6.header {
+  font-weight: 200;
+}
+
 .badge.primary,
 .label.primary {
   background: #4ea3d0;
@@ -5641,6 +5656,10 @@ body {
 
 #brand h1 {
   font-size: 1.5rem;
+}
+
+.single h2 {
+  font-weight: 800;
 }
 
 .listing h3 a {
@@ -5681,7 +5700,8 @@ body {
   line-height: 14px;
 }
 
-.meta a span {
+.meta a span,
+.tag header h2 span {
   color: #444444;
 }
 
@@ -5694,6 +5714,36 @@ body {
   text-transform: uppercase;
   font-size: .9rem;
   line-height: 20px;
+}
+
+#gsidebar li.title {
+  text-transform: none;
+  border: none;
+  padding-bottom: 0;
+}
+
+#gsidebar li.first {
+  border: none;
+}
+
+aside ul {
+  margin-top: 18px;
+}
+
+.archive li {
+  border-top: 1px dotted #cccccc;
+  padding: 12px 0 12px 30px;
+  position: relative;
+}
+
+.archive li:first-child {
+  border-top: none;
+}
+
+.archive li i {
+  position: absolute;
+  left: 0;
+  top: 12px;
 }
 
 .whoami {
@@ -5717,8 +5767,16 @@ body {
   padding-top: 30px;
 }
 
-.listing .pagi {
+.listing .pagination {
   margin: 50px 0;
+}
+
+.listing .pagination li {
+  margin-right: 4px;
+}
+
+.pagination .badge.light a {
+  color: #555555;
 }
 
 @media only screen and (max-width: 768px) {
@@ -5740,6 +5798,10 @@ body {
     float: left;
     margin-right: 12px;
     line-height: 26px;
+  }
+
+  aside ul {
+    margin-top: 0;
   }
 }
 .post pre {
