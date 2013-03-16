@@ -18,24 +18,24 @@
 $adminEnv = getenv('ADMIN_URL');
 $adminGroup = ($adminEnv) ? $adminEnv : 'admin';
 
-Route::group(array('prefix' => $adminGroup), function()
+Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
 {
     Route::get('/login', function()
     {
         return View::make('admin.login');
     });
 
-    Route::post('/login', function()
+    Route::post('/login', function() use ($adminGroup)
     {
         //Test authentication
         $authenticated = Auth::attempt( ['email' => Input::get('email'), 'password' => Input::get('password')] );
         if ( $authenticated )
         {
             // Logged in!
-            return Redirect::to('/admin');
+            return Redirect::to('/'.$adminGroup);
         } else {
             // Incorrect Login
-            return Redirect::to('/admin/login')->with('auth_error', 'Username or Password Incorrect');
+            return Redirect::to('/'.$adminGroup.'/login')->with('auth_error', 'Username or Password Incorrect');
         }
     });
 
