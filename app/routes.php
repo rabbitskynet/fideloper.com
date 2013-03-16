@@ -19,9 +19,9 @@ $adminGroup = Config::get('admin.group');
 
 Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
 {
-    Route::get('/login', function()
+    Route::get('/login', function() use($adminGroup)
     {
-        return View::make('admin.login');
+        return View::make('admin.login')->with('adminGroup', $adminGroup);
     });
 
     Route::post('/login', function() use ($adminGroup)
