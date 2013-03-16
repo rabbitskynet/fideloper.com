@@ -33,9 +33,11 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
+$adminGroup = Config::get('admin.group');
+
+Route::filter('auth', function() use($adminGroup)
 {
-	if (Auth::guest()) return Redirect::to('/admin/login');
+	if (Auth::guest()) return Redirect::to('/'.$adminGroup.'/login');
 });
 
 
