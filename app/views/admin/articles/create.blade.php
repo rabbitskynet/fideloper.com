@@ -1,5 +1,5 @@
 <div class="container">
-	<form method="post" action="/admin/article">
+	<form method="post" action="/{{ $adminGroup }}/article">
 		<div class="row">
 			<div class="span12">
 				<h1>New Article</h1>

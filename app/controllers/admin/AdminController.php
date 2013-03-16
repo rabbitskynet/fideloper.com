@@ -20,7 +20,7 @@ class AdminController extends BaseController {
 
 		return View::make('layouts.admin')
 			->with('body_class', 'admin')
-			->nest('nav', 'layouts.admin.nav')
+			->nest('nav', 'layouts.admin.nav', ['adminGroup' => Config::get('admin.group')])
 			->nest('content', 'admin.index');
 	}
 

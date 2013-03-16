@@ -6,11 +6,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/admin">Fideloper.com</a>
+          <a class="brand" href="/{{$adminGroup}}">Fideloper.com</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="@if( strpos(Request::path(), 'admin/user') !== FALSE )active@endif"><a href="/admin/user">Users</a></li>
-              <li class="@if( strpos(Request::path(), 'admin/article') !== FALSE )active@endif"><a href="/admin/article">Articles</a></li>
+              <li class="@if( strpos(Request::path(), '{{$adminGroup}}/user') !== FALSE )active@endif"><a href="/{{$adminGroup}}/user">Users</a></li>
+              <li class="@if( strpos(Request::path(), '{{$adminGroup}}/article') !== FALSE )active@endif"><a href="/{{$adminGroup}}/article">Articles</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

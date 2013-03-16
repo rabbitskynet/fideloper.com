@@ -13,8 +13,11 @@ class UserController extends BaseController {
 
 		return View::make('layouts.admin')
 			->with('body_class', 'admin article')
-			->nest('nav', 'layouts.admin.nav')
-			->nest('content', 'admin.users', ['users' => $users]);
+			->nest('nav', 'layouts.admin.nav', ['adminGroup' => Config::get('admin.group')])
+			->nest('content', 'admin.users', [
+				'users' => $users,
+				'adminGroup' => Config::get('admin.group'),
+			]);
 	}
 
 	/**
