@@ -9,7 +9,7 @@
   <meta charset="utf-8">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  
+
   @yield('header_meta')
 
   <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
@@ -40,23 +40,25 @@
 
     <section id="content">
       <div class="row">
-        
+
         @yield('content')
-        
+
+        <?php /*
         <aside class="four columns" id="gsidebar">
           @section('sidebar')
           <ul class="links">
             <li id="rss"><a href="#"><i class="icon-rss"></i>RSS</a></li>
             <li id="archive"><a href="#"><i class="icon-archive"></i>Archive</a></li>
-            <li id="twitter"><a href="#"><i class="icon-twitter"></i>Fideloper</a></li>
+            <li id="twitter"><a href="http://twitter.com/fideloper"><i class="icon-twitter"></i>Fideloper</a></li>
           </ul>
           @show
         </aside>
+        */ ?>
 
       </div><!-- end .row -->
 
     </section><!-- end  #content -->
-    
+
     @section('footer')
     <footer id="gfoot">
       <section class="row">
@@ -105,7 +107,7 @@
   <![endif]-->
 
   <!-- Social Widget Rendering Javascript /-->
-  
+
   <script src="http://platform.twitter.com/widgets.js"></script>
   <?php /* Don't need these yet
   <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
