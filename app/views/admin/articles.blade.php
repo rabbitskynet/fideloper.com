@@ -16,8 +16,8 @@
 		@foreach( $articles as $article )
 			<tr>
 				<td>{{ $article->id }}</td>
-				<td><a href="/admin/article/{{ $article->id }}/edit">{{ $article->title }}</a></td>
-				<td><a href="/admin/user/{{ $article->user->id }}/edit">{{ $article->user->email }}</a></td>
+				<td><a href="/{{ $adminGroup }}/article/{{ $article->id }}/edit">{{ $article->title }}</a></td>
+				<td><a href="/{{ $adminGroup }}/user/{{ $article->user->id }}/edit">{{ $article->user->email }}</a></td>
 				<td>{{ $article->status->name }}</td>
 				<td>{{ $article->created_at }}</td>
 				<td>{{ $article->updated_at }}</td>

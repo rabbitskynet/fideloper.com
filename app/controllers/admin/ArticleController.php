@@ -14,8 +14,11 @@ class ArticleController extends BaseController {
 
 		return View::make('layouts.admin')
 			->with('body_class', 'admin article')
-			->nest('nav', 'layouts.admin.nav')
-			->nest('content', 'admin.articles', ['articles' => $articles]);
+			->nest('nav', 'layouts.admin.nav', ['adminGroup' => Config::get('admin.group')])
+			->nest('content', 'admin.articles', [
+				'articles' => $articles,
+				'adminGroup' => Config::get('admin.group'),
+			]);
 	}
 
 	/**
@@ -30,11 +33,13 @@ class ArticleController extends BaseController {
 
 		return View::make('layouts.admin')
 			->with('body_class', 'admin article create')
-			->nest('nav', 'layouts.admin.nav')
+			->nest('nav', 'layouts.admin.nav', ['adminGroup' => Config::get('admin.group')])
 			->nest('content', 'admin.articles.create', [
 				'input' => Session::getOldInput(),
 				'authors' => $authors,
-				'statuses' => $statuses]);
+				'statuses' => $statuses,
+				'adminGroup' => Config::get('admin.group'),
+			]);
 	}
 
 	/**
@@ -76,8 +81,13 @@ class ArticleController extends BaseController {
 		{
 			return View::make('layouts.admin')
 				->with('body_class', 'admin article edit')
-				->nest('nav', 'layouts.admin.nav')
-				->nest('content', 'admin.articles.edit', ['article' => $article, 'authors' => $authors, 'statuses' => $statuses]);
+				->nest('nav', 'layouts.admin.nav', ['adminGroup' => Config::get('admin.group')])
+				->nest('content', 'admin.articles.edit', [
+					'article' => $article,
+					'authors' => $authors,
+					'statuses' => $statuses,
+					'adminGroup' => Config::get('admin.group'),
+				]);
 		}
 		return Redirect::to('admin/article');
 	}

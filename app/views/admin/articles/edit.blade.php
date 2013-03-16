@@ -1,5 +1,5 @@
 <div class="container">
-	<form method="post" action="/admin/article/{{ $article->id }}">
+	<form method="post" action="/{{ $adminGroup }}/article/{{ $article->id }}">
 		<!-- use PUT request handler -->
 		<input type="hidden" name="_method" value="PUT" />
 
