@@ -15,8 +15,7 @@
 * Routing for Admin Area
 */
 
-$adminEnv = getenv('ADMIN_URL');
-$adminGroup = ($adminEnv) ? $adminEnv : 'admin';
+$adminGroup = Config::get('admin.group');
 
 Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
 {
