@@ -63,7 +63,7 @@ class TumblrSeed extends Seeder {
     }
 
     protected function createText($article)
-    {   
+    {
         $createdAt = new DateTime('@'.$article->timestamp);
 
         $newArticle = Article::create(array(
@@ -74,7 +74,7 @@ class TumblrSeed extends Seeder {
             'excerpt' => $this->generateExcerpt($article->body),
             'content' => $article->body,
             'created_at' => $createdAt,
-            'updated_at' => new DateTime // Import date
+            'updated_at' => $createdAt
         ));
 
         // Update the date, since Article::create() ignores the set DateTime
@@ -88,7 +88,7 @@ class TumblrSeed extends Seeder {
     }
 
     protected function createLink($article)
-    {   
+    {
         $createdAt = new DateTime('@'.$article->timestamp);
 
         $newArticle = Article::create(array(
@@ -99,7 +99,7 @@ class TumblrSeed extends Seeder {
             'excerpt' => "[{$article->url}]({$article->url})",
             'content' => "[{$article->url}]({$article->url})",
             'created_at' => $createdAt,
-            'updated_at' => new DateTime
+            'updated_at' => $createdAt
         ));
 
         // Update the date, since Article::create() ignores the set DateTime
@@ -113,7 +113,7 @@ class TumblrSeed extends Seeder {
     }
 
     protected function createPhoto($article)
-    {   
+    {
         $createdAt = new DateTime('@'.$article->timestamp);
 
         $newArticle = Article::create(array(
@@ -124,7 +124,7 @@ class TumblrSeed extends Seeder {
             'excerpt' => $this->generateExcerpt($article->caption),
             'content' => $article->caption,
             'created_at' => $createdAt,
-            'updated_at' => new DateTime
+            'updated_at' => $createdAt
         ));
 
         // Update the date, since Article::create() ignores the set DateTime
@@ -186,7 +186,7 @@ class TumblrSeed extends Seeder {
             'article_id' => $article_id
         ));
 
-            
+
     }
 
     protected function urlFriendly($string)
