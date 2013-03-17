@@ -38,6 +38,13 @@ Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
         }
     });
 
+    Route::get('/logout', function()
+    {
+        Auth::logout();
+
+        return Redirect::to('/'.Config::get('admin.group'));
+    });
+
     Route::resource('/', 'AdminController');
     Route::resource('article', 'ArticleController');
     Route::resource('user', 'UserController');
