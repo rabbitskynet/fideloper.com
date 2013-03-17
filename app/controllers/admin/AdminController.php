@@ -24,9 +24,4 @@ class AdminController extends BaseController {
 			->nest('content', 'admin.index');
 	}
 
-	public function login()
-	{
-		return 'login';
-	}
-
 }

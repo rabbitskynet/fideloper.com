@@ -11,6 +11,7 @@
             <ul class="nav">
               <li class="@if( strpos(Request::path(), '{{$adminGroup}}/user') !== FALSE )active@endif"><a href="/{{$adminGroup}}/user">Users</a></li>
               <li class="@if( strpos(Request::path(), '{{$adminGroup}}/article') !== FALSE )active@endif"><a href="/{{$adminGroup}}/article">Articles</a></li>
+              <li><a href="/{{$adminGroup}}/logout">Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
