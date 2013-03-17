@@ -10,7 +10,16 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="@if( strpos(Request::path(), '{{$adminGroup}}/user') !== FALSE )active@endif"><a href="/{{$adminGroup}}/user">Users</a></li>
-              <li class="@if( strpos(Request::path(), '{{$adminGroup}}/article') !== FALSE )active@endif"><a href="/{{$adminGroup}}/article">Articles</a></li>
+              <li class="dropdown @if( strpos(Request::path(), '{{$adminGroup}}/article') !== FALSE )active@endif">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Articles <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/{{$adminGroup}}/article">All Articles</a></li>
+                  <li><a href="/{{$adminGroup}}/article/create">New Article</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav pull-right">
+              <li><a href="/{{$adminGroup}}/logout">Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
