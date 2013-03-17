@@ -2,6 +2,6 @@
 
 return array(
 
-    'ga-code': 'UA-XXXXXXXX-1'
+    'ga-code' => 'UA-XXXXXXXX-1'
 
 );
