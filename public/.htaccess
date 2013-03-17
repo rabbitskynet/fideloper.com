@@ -4,3 +4,20 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+Redirect 301 /post/44396437701	http://fideloper.com/laravel4-etag-conditional-get
+Redirect 301 /post/37032085106	http://fideloper.com/production-ubuntu-install-sphinx-search
+Redirect 301 /post/39752822439	http://fideloper.com/web-vs-native-decision
+Redirect 301 /post/38147802759	http://fideloper.com/ubuntu-install-php54-lamp
+Redirect 301 /post/35343710409	http://fideloper.com/apache-fallbackresource
+Redirect 301 /post/34901897298	http://fideloper.com/skypipe
+Redirect 301 /post/35079537172	http://fideloper.com/laravel-4-first-screencast
+Redirect 301 /post/34854270227	http://fideloper.com/chrome-canary
+Redirect 301 /page/4	        http://fideloper.com/ubuntu-prod-vhost
+Redirect 301 /page/5	        http://fideloper.com/some-common-git-tips
+Redirect 301 /post/34854270227	http://fideloper.com/apache-fallbackresource
+Redirect 301 /post/39495332524	http://fideloper.com/ubuntu-mobile-os
+Redirect 301 /post/39479813212	http://fideloper.com/google-enterprise
+Redirect 301 /post/38868495225	http://fideloper.com/what-is-scale
+Redirect 301 /page/6	        http://fideloper.com/yahoo-finance-data-from-yql-is-great-no-really
+Redirect 301 /post/40519079507	http://fideloper.com/laravel-facade-root
