@@ -52,7 +52,7 @@ class ArticleController extends BaseController {
 	{
 		// Validation plz, kthnx
 		Article::create( Input::all() );
-		return Redirect::to('admin/article');
+		return Redirect::to(Config::get('admin.group').'/article');
 	}
 
 	/**
@@ -63,7 +63,7 @@ class ArticleController extends BaseController {
 	public function show($id)
 	{
 		// In context of admin area, we go to edit
-		return Redirect::to('admin/article/'.$id.'/edit');
+		return Redirect::to(Config::get('admin.group').'/article/'.$id.'/edit');
 	}
 
 	/**
@@ -89,7 +89,7 @@ class ArticleController extends BaseController {
 					'adminGroup' => Config::get('admin.group'),
 				]);
 		}
-		return Redirect::to('admin/article');
+		return Redirect::to(Config::get('admin.group').'/article');
 	}
 
 	/**
@@ -111,7 +111,7 @@ class ArticleController extends BaseController {
 
 		$article->save();
 
-		return Redirect::to('admin/article/'.$id.'/edit');
+		return Redirect::to(Config::get('admin.group').'/article/'.$id.'/edit');
 	}
 
 	/**
@@ -127,7 +127,7 @@ class ArticleController extends BaseController {
 		$article->status = $deleted->id;
 		$article->save();
 
-		return Redirect::to('admin/article/');
+		return Redirect::to(Config::get('admin.group').'/article');
 	}
 
 }
