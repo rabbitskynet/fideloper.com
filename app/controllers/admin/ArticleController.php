@@ -2,6 +2,11 @@
 
 class ArticleController extends BaseController {
 
+	public function __construct()
+	{
+		$this->beforeFilter('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -10,7 +15,7 @@ class ArticleController extends BaseController {
 	 */
 	public function index()
 	{
-		$articles = Article::with('user')->with('status')->get();
+		$articles = Article::with('user')->with('status')->orderBy('created_at', 'desc')->get();
 
 		return View::make('layouts.admin')
 			->with('body_class', 'admin article')
@@ -52,7 +57,7 @@ class ArticleController extends BaseController {
 	{
 		// Validation plz, kthnx
 		Article::create( Input::all() );
-		return Redirect::to('admin/article');
+		return Redirect::to(Config::get('admin.group').'/article');
 	}
 
 	/**
@@ -63,7 +68,7 @@ class ArticleController extends BaseController {
 	public function show($id)
 	{
 		// In context of admin area, we go to edit
-		return Redirect::to('admin/article/'.$id.'/edit');
+		return Redirect::to(Config::get('admin.group').'/article/'.$id.'/edit');
 	}
 
 	/**
@@ -89,7 +94,7 @@ class ArticleController extends BaseController {
 					'adminGroup' => Config::get('admin.group'),
 				]);
 		}
-		return Redirect::to('admin/article');
+		return Redirect::to(Config::get('admin.group').'/article');
 	}
 
 	/**
@@ -111,7 +116,7 @@ class ArticleController extends BaseController {
 
 		$article->save();
 
-		return Redirect::to('admin/article/'.$id.'/edit');
+		return Redirect::to(Config::get('admin.group').'/article/'.$id.'/edit');
 	}
 
 	/**
@@ -127,7 +132,7 @@ class ArticleController extends BaseController {
 		$article->status = $deleted->id;
 		$article->save();
 
-		return Redirect::to('admin/article/');
+		return Redirect::to(Config::get('admin.group').'/article');
 	}
 
 }
