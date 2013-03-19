@@ -75,6 +75,16 @@
 				</div>
 			</div><!-- end .span9 -->
 			<div class="span3">
+				<!-- tags -->
+				<div class="control-group @if( isset($errors) && $errors->has('tags') )error@endif">
+					<label class="control-label" for="tags">Tags:</label>
+					<div class="controls">
+						<input type="text" name="tags" id="tags" value="{{ $article_tags_formatted }}" />
+						@if( isset($errors) && $errors->has('tags') )
+						<span class="help-inline">{{ $errors->first('tags') }}</span>
+						@endif
+					</div>
+				</div>
 
 				<!-- author -->
 				<div class="control-group @if( isset($errors) && $errors->has('user_id') )error@endif">
