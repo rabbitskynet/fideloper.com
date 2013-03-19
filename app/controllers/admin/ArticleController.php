@@ -2,6 +2,11 @@
 
 class ArticleController extends BaseController {
 
+	public function __construct()
+	{
+		$this->beforeFilter('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -10,7 +15,7 @@ class ArticleController extends BaseController {
 	 */
 	public function index()
 	{
-		$articles = Article::with('user')->with('status')->get();
+		$articles = Article::with('user')->with('status')->orderBy('created_at', 'desc')->get();
 
 		return View::make('layouts.admin')
 			->with('body_class', 'admin article')
@@ -51,8 +56,26 @@ class ArticleController extends BaseController {
 	public function store()
 	{
 		// Validation plz, kthnx
-		Article::create( Input::all() );
-		return Redirect::to('admin/article');
+		$data = array(
+			'user_id' => Input::get('user_id'),
+			'status_id' => Input::get('status_id'),
+			'title' => Input::get('title'),
+			'url_title' => Input::get('url_title'),
+			'excerpt' => Input::get('excerpt'),
+			'content' => Input::get('content'),
+		);
+
+		$article = Article::create( $data );
+
+		$tag = new Tag;
+		$tags = $tag->tagsFromString( Input::get('tags') );
+
+		if( count($tags) )
+		{
+			$tag->setTagsForArticle($article->id, $tags);
+		}
+
+		return Redirect::to(Config::get('admin.group').'/article');
 	}
 
 	/**
@@ -63,7 +86,7 @@ class ArticleController extends BaseController {
 	public function show($id)
 	{
 		// In context of admin area, we go to edit
-		return Redirect::to('admin/article/'.$id.'/edit');
+		return Redirect::to(Config::get('admin.group').'/article/'.$id.'/edit');
 	}
 
 	/**
@@ -73,9 +96,15 @@ class ArticleController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$article = Article::find($id);
+		$article = Article::with('tags')->find($id);
 		$authors = User::all();
 		$statuses = Status::all();
+
+		$tags = [];
+		foreach( $article->tags as $tag )
+		{
+			$tags[] = $tag->name;
+		}
 
 		if ( is_object($article) )
 		{
@@ -84,12 +113,14 @@ class ArticleController extends BaseController {
 				->nest('nav', 'layouts.admin.nav', ['adminGroup' => Config::get('admin.group')])
 				->nest('content', 'admin.articles.edit', [
 					'article' => $article,
+					'article_tags' => $tags,
+					'article_tags_formatted' => implode(', ', $tags),
 					'authors' => $authors,
 					'statuses' => $statuses,
 					'adminGroup' => Config::get('admin.group'),
 				]);
 		}
-		return Redirect::to('admin/article');
+		return Redirect::to(Config::get('admin.group').'/article');
 	}
 
 	/**
@@ -111,7 +142,15 @@ class ArticleController extends BaseController {
 
 		$article->save();
 
-		return Redirect::to('admin/article/'.$id.'/edit');
+		$tag = new Tag;
+		$tags = $tag->tagsFromString( Input::get('tags') );
+
+		if( count($tags) )
+		{
+			$tag->setTagsForArticle($id, $tags);
+		}
+
+		return Redirect::to(Config::get('admin.group').'/article/'.$id.'/edit');
 	}
 
 	/**
@@ -127,7 +166,7 @@ class ArticleController extends BaseController {
 		$article->status = $deleted->id;
 		$article->save();
 
-		return Redirect::to('admin/article/');
+		return Redirect::to(Config::get('admin.group').'/article');
 	}
 
 }
