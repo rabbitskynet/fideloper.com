@@ -28,8 +28,8 @@
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'fideloper'; // required: replace example with your Disqus site shortname
-            var disqus_url = 'http://fideloper.com/post/44396437701/laravel4-etag-conditional-get';
-            var disqus_title = 'ETag&#8217;s and Conditional GET&#8217;s in Laravel 4';
+            var disqus_url = 'http://fideloper.com/{{ $article->url_title }}';
+            var disqus_title = "{{ $article->title }}";
 
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function() {
