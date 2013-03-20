@@ -18,7 +18,7 @@ class Article implements ArticleInterface {
     {
         return $this->article->where('status_id', 1)
                             ->orderBy('created_at', 'desc')
-                            ->take(3)
+                            ->take($limit)
                             ->get();
     }
 

@@ -83,4 +83,32 @@ class ContentController extends BaseController {
 		return $date;
 	}
 
+	public function feed()
+	{
+		$feed = new Suin\RSSWriter\Feed();
+		$channel = new Suin\RSSWriter\Channel();
+
+		$channel
+		    ->title( "Fideloper" )
+		    ->description( "Lead dev @digitalsurgeons. I do LAMP, Laravel, Nodejs, Python, and lots of server stuff." )
+		    ->url( 'http://fideloper.com' )
+		    ->appendTo( $feed );
+
+		$articles = $this->article->getRecent(30);
+
+		foreach( $articles as $article )
+		{
+			$item = new Suin\RSSWriter\Item();
+
+			$item
+			    ->title( $article->title )
+			    ->description( $article->excerpt )
+			    ->url( 'http://fideloper.com/'.$article->url_title )
+			    ->appendTo( $channel );
+		}
+
+		return Response::make($feed, 200, ['Content-Type' => 'application/xml']);
+
+	}
+
 }
