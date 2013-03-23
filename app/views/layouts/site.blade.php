@@ -26,6 +26,8 @@
 <body>
 
   <div class="container">
+    @yield('adminhead')
+
     @section('header')
     <header class="row" id="gheader">
       <div class="four columns" id="brand">

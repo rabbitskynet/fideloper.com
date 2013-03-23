@@ -132,6 +132,7 @@
 				</div>
 
 				<button class="btn btn-large btn-primary" type="submit">Update</button>
+				<a href="/{{ $adminGroup }}/article/{{ $article->id }}" class="btn" onclick="return confirm('Did you save first?');">Preview</a>
 
 			</div><!-- end .span3 -->
 		</div><!-- end .row -->
