@@ -87,6 +87,7 @@ Route::get('/sitemap.xml', function() {
 * Blog content routing
 */
 Route::get('/', 'ContentController@index');
+Route::get('/feed', 'ContentController@feed');
 Route::get('/tag/{tag}', 'ContentController@tag');
 Route::get('/archive/{date}', 'ContentController@archive');
 Route::get('/{slug}', 'ContentController@article');
