@@ -2,9 +2,14 @@
 
 class ArticleController extends BaseController {
 
-	public function __construct()
+	protected $article;
+
+	public function __construct(Fideloper\Storage\Article\ArticleInterface $article)
 	{
 		$this->beforeFilter('auth');
+
+		// For use in preview
+		$this->article = $article;
 	}
 
 	/**
@@ -85,8 +90,40 @@ class ArticleController extends BaseController {
 	 */
 	public function show($id)
 	{
-		// In context of admin area, we go to edit
-		return Redirect::to(Config::get('admin.group').'/article/'.$id.'/edit');
+		// In context of admin area, we'll preview the article
+		$article = Article::find( $id );
+		$recents = $this->article->getRecent();
+
+		if( !$article )
+		{
+			App::abort(404);
+		}
+
+		// Head data
+		$tags = [];
+		foreach( $article->tags as $tag )
+		{
+			$tags[] = $tag->name;
+		}
+
+		$head = App::make('headdata');
+		$head->add('title', $article->title.' | Fideloper');
+		$head->add('keywords', implode(',', $tags));
+
+		// Output Article
+		$layout = View::make('layouts.site');
+		$layout->header_meta = View::make('layouts.meta')->with('head', App::make('headdata'));
+		$layout->scripts = View::make('layouts.scripts')->with('gacode', Config::get('analytics.ga-code'));
+		$layout->content = View::make('content.article', [
+			'article' => $article,
+			'recents' => $recents,
+			'context' => array(
+				'where' => 'admin',
+				'back_link' => '/'.Config::get('admin.group').'/article/'.$id.'/edit'
+			)
+		]);
+
+		return $layout;
 	}
 
 	/**
@@ -99,6 +136,11 @@ class ArticleController extends BaseController {
 		$article = Article::with('tags')->find($id);
 		$authors = User::all();
 		$statuses = Status::all();
+
+		if( !$article )
+		{
+			App::abort(404);
+		}
 
 		$tags = [];
 		foreach( $article->tags as $tag )

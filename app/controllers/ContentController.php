@@ -15,7 +15,7 @@ class ContentController extends BaseController {
 	* Display listing of latest articles
 	*/
 	public function index()
-	{	
+	{
 		$articles = $this->article->getPaginated();
 
 		$this->layout->content = View::make('content.home')->with('articles', $articles);
@@ -48,7 +48,10 @@ class ContentController extends BaseController {
 		// Output Article
 		$this->layout->content = View::make('content.article', [
 			'article' => $article,
-			'recents' => $recents
+			'recents' => $recents,
+			'context' => array(
+				'where' => 'frontend'
+			)
 		]);
 	}
 

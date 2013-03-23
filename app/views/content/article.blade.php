@@ -1,4 +1,15 @@
 @extends('layouts.site')
+
+@if ( $context['where'] === 'admin' )
+    @section('adminhead')
+        <nav class="row" id="adminhead">
+            <div class="sixteen columns">
+                <a href="{{ $context['back_link'] }}">&laquo; Back to Edit Article</a>
+            </div>
+        </nav>
+    @stop
+@endif
+
 @section('sidebar')
     @parent
     <ul class="archive">
@@ -8,6 +19,7 @@
         @endforeach
     </ul>
 @stop
+
 @section('content')
 <article class="twelve columns post single">
   <div class="row">
@@ -24,6 +36,7 @@
         <h2 class="title">{{ $article->title }}</h2>
         {{ \Michelf\MarkdownExtra::defaultTransform($article->content) }}
 
+        @if ( $context['where'] !== 'admin' )
         <div id="disqus_thread"></div>
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -40,7 +53,7 @@
         </script>
         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
+        @endif
     </div><!-- end content -->
   </div>
 </article><!-- end article -->
