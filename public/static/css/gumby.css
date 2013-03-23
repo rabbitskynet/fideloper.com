@@ -5779,6 +5779,10 @@ aside ul {
   color: #555555;
 }
 
+#disqus_thread {
+  margin-top: 100px;
+}
+
 @media only screen and (max-width: 768px) {
   #brand,
   #brand p {

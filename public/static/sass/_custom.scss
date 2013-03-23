@@ -166,6 +166,10 @@ aside ul {
     color: #555555;
 }
 
+#disqus_thread {
+    margin-top: 100px;
+}
+
 @include respond(portrait-tablets) {
 
     #brand,
