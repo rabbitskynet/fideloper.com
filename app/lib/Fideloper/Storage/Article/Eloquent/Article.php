@@ -40,7 +40,8 @@ class Article implements ArticleInterface {
     public function getByTag($tag)
     {
         $foundTag = $this->tag->with(['articles' => function($query) {
-            $query->where('status_id', 1);
+            $query->where('status_id', 1)
+		  ->orderBy('created_at', 'desc');
         }])->where('url_name', $tag)
            ->first();
 
