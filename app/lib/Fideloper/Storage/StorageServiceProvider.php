@@ -15,6 +15,8 @@ class StorageServiceProvider extends ServiceProvider {
         $app = $this->app;
 
         $app->bind('Fideloper\Storage\Article\ArticleInterface', 'Fideloper\Storage\Article\Eloquent\Article');
+
+        $app->bind('Fideloper\Storage\Tag\TagInterface', 'Fideloper\Storage\Tag\Eloquent\Tag');
     }
 
 }
