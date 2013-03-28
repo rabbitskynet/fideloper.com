@@ -9,6 +9,8 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
+        Eloquent::unguard();
+        
         // No relationships columns
         $this->call('UserSeed');
         $this->call('StatusSeed');
