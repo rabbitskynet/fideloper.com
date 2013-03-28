@@ -5,10 +5,12 @@ class ContentController extends BaseController {
 	protected $layout = 'layouts.site';
 
 	protected $article;
+	protected $tag;
 
-	public function __construct(Fideloper\Storage\Article\ArticleInterface $article)
+	public function __construct(Fideloper\Storage\Article\ArticleInterface $article, Fideloper\Storage\Tag\TagInterface $tag)
 	{
 		$this->article = $article;
+		$this->tag = $tag;
 	}
 
 	/**
@@ -18,7 +20,9 @@ class ContentController extends BaseController {
 	{
 		$articles = $this->article->getPaginated();
 
-		$this->layout->content = View::make('content.home')->with('articles', $articles);
+		$tags = $this->tag->getPopular();
+
+		$this->layout->content = View::make('content.home')->with('articles', $articles)->with('tags', $tags);
 	}
 
 	/**
@@ -61,6 +65,7 @@ class ContentController extends BaseController {
 	public function tag($tag)
 	{
 		$articles = $this->article->getByTag($tag);
+		$tags = $this->tag->getPopular();
 
 		if( count($articles) === 0 )
 		{
@@ -74,7 +79,8 @@ class ContentController extends BaseController {
 		// Output Articles
 		$this->layout->content = View::make('content.tags', [
 			'articles' => $articles,
-			'tag' => $tag
+			'tag' => $tag,
+			'tags' => $tags,
 		]);
 	}
 
