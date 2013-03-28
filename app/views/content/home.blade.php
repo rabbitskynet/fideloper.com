@@ -18,7 +18,7 @@
     <ul class="archive">
         <li class="title"><h5 class="header">Tags</h5></li>
         @foreach($tags as $tag)
-        <li><a href="/tag/{{ $tag->url_name }}"><i class="icon-right-open-mini"></i>{{ $tag->name }}</a></li>
+        <li><a href="/tag/{{ $tag->url_name }}"><i class="icon-right-open-mini"></i>{{ $tag->name }} ({{ $tag->tag_count }})</a></li>
         @endforeach
     </ul>
 @stop
