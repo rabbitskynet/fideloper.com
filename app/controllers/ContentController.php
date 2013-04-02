@@ -15,6 +15,8 @@ class ContentController extends BaseController {
 
 	/**
 	* Display listing of latest articles
+	*
+	* @todo handle "no articles" situation?
 	*/
 	public function index()
 	{
@@ -58,12 +60,13 @@ class ContentController extends BaseController {
 	public function article($slug)
 	{
 		$article = $this->article->getBySlug($slug);
-		$recents = $this->article->getRecent();
 
 		if( !$article )
 		{
 			App::abort(404);
 		}
+
+		$recents = $this->article->getRecent();
 
 		$resEtag = $article->getEtag();
 
@@ -112,6 +115,11 @@ class ContentController extends BaseController {
 	{
 		$articles = $this->article->getByTag($tag);
 
+		if( count($articles) === 0 )
+		{
+			App::abort(404);
+		}
+
 		// ETag based on collection of results, not the tag itself
 		$resEtag = $articles->getEtags();
 
@@ -125,11 +133,6 @@ class ContentController extends BaseController {
 			if ( $reqEtags === $resEtag ) {
 				App::abort(304);
 			}
-		}
-
-		if( count($articles) === 0 )
-		{
-			App::abort(404);
 		}
 
 		$tags = $this->tag->getPopular();
