@@ -1,6 +1,8 @@
 <?php
 
-class Status extends Eloquent {
+use Fideloper\Resource\Eloquent\Resource;
+
+class Status extends Resource {
 
     /**
      * The database table used by the model.
