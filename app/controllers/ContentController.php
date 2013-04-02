@@ -40,7 +40,7 @@ class ContentController extends BaseController {
 			$reqEtags = str_replace('"', '', $reqEtags[0]);
 
 			if ( $reqEtags === $resEtag ) {
-				App::abort(304);
+				App::abort(304); // Don't need Last Modified on 304 response
 			}
 		}
 
@@ -49,7 +49,11 @@ class ContentController extends BaseController {
 		$this->layout->content = View::make('content.home')->with('articles', $articles)->with('tags', $tags);
 
 		$response = Response::make($this->layout, 200);
-		$response->setEtag( $resEtag );
+		$response->setCache([
+			'etag' => $resEtag,
+			'last_modified' => DateTime::createFromFormat('Y-m-d G:i:s', $articles[0]->updated_at),
+			'max_age' => 86400 // One day
+		]);
 
 		return $response;
 	}
@@ -103,7 +107,11 @@ class ContentController extends BaseController {
 		]);
 
 		$response = Response::make($this->layout, 200);
-		$response->setEtag( $resEtag );
+		$response->setCache([
+			'etag' => $resEtag,
+			'last_modified' => DateTime::createFromFormat('Y-m-d G:i:s', $article->updated_at),
+			'max_age' => 86400 // One day
+		]);
 
 		return $response;
 	}
@@ -149,7 +157,11 @@ class ContentController extends BaseController {
 		]);
 
 		$response = Response::make($this->layout, 200);
-		$response->setEtag( $resEtag );
+		$response->setCache([
+			'etag' => $resEtag,
+			'last_modified' => DateTime::createFromFormat('Y-m-d G:i:s', $articles[0]->updated_at),
+			'max_age' => 86400 // One day
+		]);
 
 		return $response;
 	}
