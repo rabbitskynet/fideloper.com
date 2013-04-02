@@ -20,9 +20,36 @@ class ContentController extends BaseController {
 	{
 		$articles = $this->article->getPaginated();
 
+		// Generate ETag that represents current items ETag
+		$etag = '';
+
+		foreach( $articles as $article )
+		{
+			$etag .= $article->getEtag();
+		}
+
+		$resEtag = md5($etag);
+
+		// Abort if request ETag matches this one
+		$reqEtags = Request::getEtags();
+
+		if ( isset($reqEtags[0]) )
+		{
+			$reqEtags = str_replace('"', '', $reqEtags[0]);
+
+			if ( $reqEtags === $resEtag ) {
+				App::abort(304);
+			}
+		}
+
 		$tags = $this->tag->getPopular();
 
 		$this->layout->content = View::make('content.home')->with('articles', $articles)->with('tags', $tags);
+
+		$response = Response::make($this->layout, 200);
+		$response->setEtag( $resEtag );
+
+		return $response;
 	}
 
 	/**
@@ -36,6 +63,20 @@ class ContentController extends BaseController {
 		if( !$article )
 		{
 			App::abort(404);
+		}
+
+		$resEtag = $article->getEtag();
+
+		// Abort if request ETag matches this one
+		$reqEtags = Request::getEtags();
+
+		if ( isset($reqEtags[0]) )
+		{
+			$reqEtags = str_replace('"', '', $reqEtags[0]);
+
+			if ( $reqEtags === $resEtag ) {
+				App::abort(304);
+			}
 		}
 
 		// Head data
@@ -57,6 +98,11 @@ class ContentController extends BaseController {
 				'where' => 'frontend'
 			)
 		]);
+
+		$response = Response::make($this->layout, 200);
+		$response->setEtag( $resEtag );
+
+		return $response;
 	}
 
 	/**
