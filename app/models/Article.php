@@ -11,6 +11,15 @@ class Article extends Resource {
      */
     protected $table = 'articles';
 
+    protected $fillable = array(
+        'user_id',
+        'status_id',
+        'title',
+        'url_title',
+        'excerpt',
+        'content',
+    );
+
     public function tags()
     {
         return $this->belongsToMany('Tag', 'tags_articles', 'article_id', 'tag_id');

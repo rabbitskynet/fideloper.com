@@ -11,4 +11,9 @@ class TagArticle extends Resource {
      */
     protected $table = 'tags_articles';
 
+    protected $fillable = array(
+        'tag_id',
+        'article_id',
+    );
+
 }
