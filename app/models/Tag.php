@@ -11,6 +11,11 @@ class Tag extends Resource {
      */
     protected $table = 'tags';
 
+    protected $fillable = array(
+        'name',
+        'url_name',
+    );
+
     public function articles()
     {
         // Probably shouldbe hasMany
