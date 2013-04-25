@@ -151,6 +151,15 @@ AddDefaultCharset utf-8
     AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
 </IfModule>
 
+# ----------------------------------------------------------------------
+# Unset file ETags to aid in Varnish cache
+# ----------------------------------------------------------------------
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+
+FileETag None
+
 Redirect 301 /post/44396437701	http://fideloper.com/laravel4-etag-conditional-get
 Redirect 301 /post/37032085106	http://fideloper.com/production-ubuntu-install-sphinx-search
 Redirect 301 /post/39752822439	http://fideloper.com/web-vs-native-decision
