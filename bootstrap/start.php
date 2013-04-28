@@ -27,7 +27,7 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
 	'local' => array('fideloper.ubuntu.local', 'fidache.ubuntu.local'),
-    	'production' => array('www.fideloper.com', 'fideloper.com', '208.68.38.77.xip.io')
+    	'production' => array('www.fideloper.com', 'fideloper.com', '208.68.38.77.xip.io', '198.211.113.202.xip.io')
 
 ));
 
