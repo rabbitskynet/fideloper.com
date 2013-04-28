@@ -49,8 +49,8 @@
           @section('sidebar')
           <ul class="links">
             <li id="rss"><a href="/feed"><i class="icon-rss"></i>RSS</a></li>
-            <!-- <li id="archive"><a href="#"><i class="icon-archive"></i>Archive</a></li> -->
-            <li id="twitter"><a href="http://twitter.com/fideloper"><i class="icon-twitter"></i>Fideloper</a></li>
+            <li id="twitter"><a href="https://twitter.com/fideloper"><i class="icon-twitter"></i>@Fideloper</a></li>
+            <li id="twitter"><a href="https://github.com/fideloper"><i class="icon-github"></i>Github</a></li>
           </ul>
           @show
         </aside>
