@@ -22,37 +22,15 @@ class ContentController extends BaseController {
 	{
 		$articles = $this->article->getPaginated();
 
-		// Generate ETag that represents current items ETag
-		$etag = '';
-
-		foreach( $articles as $article )
-		{
-			$etag .= $article->getEtag();
-		}
-
-		$resEtag = md5($etag);
-
-		// Abort if request ETag matches this one
-		$reqEtags = Request::getEtags();
-
-		if ( isset($reqEtags[0]) )
-		{
-			$reqEtags = str_replace('"', '', $reqEtags[0]);
-
-			if ( $reqEtags === $resEtag ) {
-				App::abort(304); // Don't need Last Modified on 304 response
-			}
-		}
-
 		$tags = $this->tag->getPopular();
 
 		$this->layout->content = View::make('content.home')->with('articles', $articles)->with('tags', $tags);
 
 		$response = Response::make($this->layout, 200);
 		$response->setCache([
-			'etag' => $resEtag,
 			'last_modified' => DateTime::createFromFormat('Y-m-d G:i:s', $articles[0]->updated_at),
-			'max_age' => 86400 // One day
+			'max_age' => 86400, // One day
+			'public' => true,
 		]);
 
 		return $response;
@@ -71,20 +49,6 @@ class ContentController extends BaseController {
 		}
 
 		$recents = $this->article->getRecent();
-
-		$resEtag = $article->getEtag();
-
-		// Abort if request ETag matches this one
-		$reqEtags = Request::getEtags();
-
-		if ( isset($reqEtags[0]) )
-		{
-			$reqEtags = str_replace('"', '', $reqEtags[0]);
-
-			if ( $reqEtags === $resEtag ) {
-				App::abort(304);
-			}
-		}
 
 		// Head data
 		$tags = [];
@@ -108,9 +72,9 @@ class ContentController extends BaseController {
 
 		$response = Response::make($this->layout, 200);
 		$response->setCache([
-			'etag' => $resEtag,
 			'last_modified' => DateTime::createFromFormat('Y-m-d G:i:s', $article->updated_at),
-			'max_age' => 86400 // One day
+			'max_age' => 86400, // One day
+			'public' => true,
 		]);
 
 		return $response;
@@ -128,21 +92,6 @@ class ContentController extends BaseController {
 			App::abort(404);
 		}
 
-		// ETag based on collection of results, not the tag itself
-		$resEtag = $articles->getEtags();
-
-		// Abort if request ETag matches this one
-		$reqEtags = Request::getEtags();
-
-		if ( isset($reqEtags[0]) )
-		{
-			$reqEtags = str_replace('"', '', $reqEtags[0]);
-
-			if ( $reqEtags === $resEtag ) {
-				App::abort(304);
-			}
-		}
-
 		$tags = $this->tag->getPopular();
 
 		// Head data
@@ -158,9 +107,9 @@ class ContentController extends BaseController {
 
 		$response = Response::make($this->layout, 200);
 		$response->setCache([
-			'etag' => $resEtag,
 			'last_modified' => DateTime::createFromFormat('Y-m-d G:i:s', $articles[0]->updated_at),
-			'max_age' => 86400 // One day
+			'max_age' => 86400, // One day
+			'public' => true,
 		]);
 
 		return $response;
