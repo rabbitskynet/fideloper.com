@@ -18,6 +18,10 @@
         <li><a href="/{{ $recent->url_title }}"><i class="icon-right-open-mini"></i>{{ $recent->title }}</a></li>
         @endforeach
     </ul>
+    <ul class="archive">
+        <li class="title"><h5 class="header">Other Writings</h5></li>
+        <li><a href="http://net.tutsplus.com/tutorials/php/laravel-4-a-start-at-a-restful-api"><i class="icon-right-open-mini"></i>Laravel 4 REST API</a></li>
+    </ul>
 @stop
 
 @section('content')
