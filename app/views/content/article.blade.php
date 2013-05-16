@@ -20,7 +20,8 @@
     </ul>
     <ul class="archive">
         <li class="title"><h5 class="header">Other Writings</h5></li>
-        <li><a href="http://net.tutsplus.com/tutorials/php/laravel-4-a-start-at-a-restful-api"><i class="icon-right-open-mini"></i>Laravel 4 REST API</a></li>
+        <li><a href="http://net.tutsplus.com/tutorials/php/laravel-4-a-start-at-a-restful-api/"><i class="icon-right-open-mini"></i>Laravel 4 REST API</a></li>
+        <li><a href="http://net.tutsplus.com/tutorials/php/how-to-write-testable-and-maintainable-code-in-php/"><i class="icon-right-open-mini"></i>Testable/Maintainable PHP</a></li>
     </ul>
 @stop
 
