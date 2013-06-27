@@ -12,6 +12,4 @@ interface ArticleInterface {
 
     public function getByDate($monthyear);
 
-    public function getEtag();
-
 }

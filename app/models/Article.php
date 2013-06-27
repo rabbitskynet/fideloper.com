@@ -1,8 +1,6 @@
 <?php
 
-use Fideloper\Resource\Eloquent\Resource;
-
-class Article extends Resource {
+class Article extends Eloquent {
 
     /**
      * The database table used by the model.

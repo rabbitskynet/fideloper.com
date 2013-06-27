@@ -3,6 +3,3 @@
 composer.phar
 composer.lock
 .DS_Store
-._*
-.sass_cache
-public/static/.sass-cache

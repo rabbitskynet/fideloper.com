@@ -1,5 +1,3 @@
-## Fideloper.com
+# Fideloper.com
 
-I play with Laravel, code crafting and technologies with my blog
-
-This blog is usable by others!
+My personal blog site.
