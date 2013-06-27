@@ -1,6 +1,6 @@
     <div class="container">
 
-      <form class="form-signin form-horizontal" method="post" action="/{{$adminGroup}}/login">
+      <form class="form-signin form-horizontal" method="post" action="/{{ $adminGroup }}/login">
         <h2 class="">Please sign in</h2>
         @if ( isset($auth_error) )
         <p>{{ $auth_error }}</p>
@@ -8,7 +8,7 @@
         <div class="control-group @if( isset($errors) && $errors->has('email') ) error @endif">
           <label class="control-label" for="email">Email:</label>
           <div class="controls">
-            <input type="text" id="email" name="email" placeholder="Email address" value="@if( isset($input['email']) ){{ $input['email'] }}@endif">
+            <input type="email" id="email" name="email" placeholder="Email address" value="@if( isset($input['email']) ){{ $input['email'] }}@endif">
             @if( isset($errors) && $errors->has('email') )
             <span class="help-inline">{{ $errors->first('email') }}</span>
             @endif
@@ -23,9 +23,6 @@
             @endif
             </div>
         </div>
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
         <button class="btn btn-large btn-primary" type="submit">Sign in</button>
       </form>
     </div> <!-- /container -->
