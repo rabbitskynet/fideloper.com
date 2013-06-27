@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'database',
-			'username'  => 'root',
-			'password'  => '',
+			'database'  => defined('FID_DB_DB') ? FID_DB_DB : '',
+			'username'  => defined('FID_DB_USER') ? FID_DB_USER : '',
+			'password'  => defined('FID_DB_PASS') ? FID_DB_PASS : '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
