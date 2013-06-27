@@ -9,17 +9,9 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
-        Eloquent::unguard();
-        
-        // No relationships columns
-        $this->call('UserSeed');
-        $this->call('StatusSeed');
-        //$this->call('TagSeed');
+		Eloquent::unguard();
 
-        // Has relationship columns
-        $this->call('TumblrSeed');      # Handles Articles, Tags and Article-Tag relationship
-        //$this->call('ArticleSeed');
-        //$this->call('ArticleTagSeed');
+		// $this->call('UserTableSeeder');
 	}
 
 }

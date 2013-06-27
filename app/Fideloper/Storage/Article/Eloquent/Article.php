@@ -58,8 +58,4 @@ class Article implements ArticleInterface {
         return [];
     }
 
-    public function getEtag()
-    {
-        return $this->article->getEtag();
-    }
 }

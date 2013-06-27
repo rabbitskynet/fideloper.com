@@ -1,4 +1,7 @@
 {
+	"name": "laravel/laravel",
+	"description": "The Laravel Framework.",
+	"keywords": ["framework", "laravel"],
 	"require": {
 		"laravel/framework": "4.0.*",
 		"michelf/php-markdown": "1.3.*@dev",
@@ -15,11 +18,22 @@
 			"app/tests/TestCase.php"
 		],
 		"psr-0": {
-			"Fideloper": "app/lib"
+			"Fideloper": "app/"
 		}
 	},
 	"scripts": {
-		"post-update-cmd": "php artisan optimize"
+		"post-install-cmd": [
+			"php artisan optimize"
+		],
+		"pre-update-cmd": [
+			"php artisan clear-compiled"
+		],
+		"post-update-cmd": [
+			"php artisan optimize"
+		],
+		"post-create-project-cmd": [
+			"php artisan key:generate"
+		]
 	},
 	"config": {
 		"preferred-install": "dist"

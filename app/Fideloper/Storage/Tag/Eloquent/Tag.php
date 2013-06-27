@@ -22,9 +22,4 @@ class Tag implements TagInterface {
                                         ->get();
     }
 
-    public function getEtag()
-    {
-        return $this->tag->getEtag();
-    }
-
 }
