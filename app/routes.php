@@ -21,7 +21,10 @@ Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
 {
     Route::get('/login', function() use($adminGroup)
     {
-        return View::make('admin.login')->with('adminGroup', $adminGroup);
+        return View::make('layouts.admin')
+            ->with('body_class', 'admin login')
+            ->nest('nav', 'layouts.admin.navlogin', ['adminGroup' => $adminGroup])
+            ->nest('content', 'admin.login', ['adminGroup' => $adminGroup]);
     });
 
     Route::post('/login', function() use ($adminGroup)

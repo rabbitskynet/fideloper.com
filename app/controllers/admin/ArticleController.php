@@ -20,7 +20,7 @@ class ArticleController extends BaseController {
 	 */
 	public function index()
 	{
-		$articles = Article::with('user')->with('status')->orderBy('created_at', 'desc')->get();
+		$articles = Article::with('user')->with('status')->orderBy('created_at', 'desc')->paginate(20);
 
 		return View::make('layouts.admin')
 			->with('body_class', 'admin article')
