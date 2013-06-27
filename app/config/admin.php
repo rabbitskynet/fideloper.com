@@ -2,6 +2,6 @@
 
 return array(
 
-    'group' => (getenv('ADMIN_URL') !== FALSE) ? getenv('ADMIN_URL') : 'admin'
+    'group' => (defined('FID_ADMIN_URL') !== FALSE) ? FID_ADMIN_URL : 'admin'
 
 );
