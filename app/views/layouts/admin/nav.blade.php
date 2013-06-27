@@ -17,6 +17,7 @@
                   <li><a href="/{{$adminGroup}}/article/create">New Article</a></li>
                 </ul>
               </li>
+              <li><a href="/{{$adminGroup}}/article/create">New Article</a></li>
             </ul>
             <ul class="nav pull-right">
               <li><a href="/{{$adminGroup}}/logout">Logout</a></li>
