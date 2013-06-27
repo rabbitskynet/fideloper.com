@@ -27,6 +27,10 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="/assets/admin/js/bootstrap.min.js"></script>
-
+    <script>
+    $(function() {
+      $('.pagination li').removeClass('badge');
+    });
+    </script>
   </body>
 </html>
