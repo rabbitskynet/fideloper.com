@@ -32,7 +32,7 @@
       <time>{{ ExpressiveDate::make($article->created_at)->getRelativeDate() }}</time>
       <ul class="tags">
 	@foreach( $article->tags as $tag )	
-        <li class="primary badge"><i class="icon-tag"></i><a href="/tag/{{$tag->url_name}}">{{ $tag->name }}</a></li><br />
+        <li class="primary badge"><i class="icon-tag"></i><a href="/tag/{{$tag->url_name}}">{{ $tag->name }}</a></li>
 	@endforeach
       </ul>
     </aside>

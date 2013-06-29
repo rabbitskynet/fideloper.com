@@ -81,6 +81,7 @@ body {
 }
 
 .meta time {
+    display: block;
     margin-top: 16px;
     font-family: 'Times New Roman', Times, serif;
     text-transform: uppercase;
@@ -203,11 +204,11 @@ aside ul {
         margin: 20px 0;
     }
 
-    .meta time,
-    .meta li {
+    .meta time {
         float: left;
         margin-right: 12px;
         line-height: 26px;
+	margin-top: 0;
     }
 
     aside ul {
