@@ -32,7 +32,6 @@
     <header class="row" id="gheader">
       <div class="four columns" id="brand">
         <h1><a href="/">Fideloper</a></h1>
-        <p class="whoami">Lead dev @digitalsurgeons. I do LAMP, Laravel, Nodejs, Python, and lots of server stuff.</p>
       </div>
       <div class="four columns push_eight" id="avatar">
         <a href="/"><img src="/static/facebook.png" alt="" /></a>
