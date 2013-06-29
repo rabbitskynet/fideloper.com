@@ -28,6 +28,11 @@ h6.header {
     font-weight: 200;
 }
 
+#avatar h1 {
+    font-size: 16px;
+    font-size: 3rem;
+}
+
 .badge.primary,
 .label.primary {
 background: $fideloper-blue;
@@ -58,34 +63,30 @@ body {
 }
 
 #gheader {
-    margin: 25px auto 25px auto;
+    margin: 15px auto 25px auto;
+}
+
+#avatar {
+    text-align: center;
 }
 
 #avatar a {
-    box-shadow: 0 1px 3px rgba(0,0,0,.21);
-    display: block;
-    float: left;
+    /* box-shadow: 0 1px 3px rgba(0,0,0,.21); */
     line-height: 0;
-    position: relative;
-    margin-left: 50%;
-    left: -32px;
+    text-align: center;
 }
 
 #avatar a img {
-    border-radius: 2px;
+    width: 110px;
 }
 
-.meta {
+.meta time {
     margin-top: 16px;
     font-family: 'Times New Roman', Times, serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
-.meta a {
-    font-size: .8rem;
-    line-height: 14px;
-}
 
 .meta a span,
 .tag header h2 span {
@@ -164,6 +165,23 @@ aside ul {
 
 .pagination .badge.light a {
     color: #555555;
+}
+
+.tags .badge {
+    padding-left: 4px;
+}
+
+.tags .icon-cancel,
+.tags .icon-tag {
+    margin: 0;
+    border-right: 1px solid lighten($fideloper-blue, 9%);
+    text-shadow: 1px 1px lighten($fideloper-blue, 9%), -1px -1px darken($fideloper-blue, 4%);
+    padding: 0 4px;
+}
+
+.tags a {
+    padding-left: 6px;
+    text-shadow: 1px 1px lighten($fideloper-blue, 9%), -1px -1px darken($fideloper-blue, 4%);
 }
 
 #disqus_thread {

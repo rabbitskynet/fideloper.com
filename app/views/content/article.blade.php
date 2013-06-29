@@ -30,10 +30,10 @@
   <div class="row">
     <aside class="meta four columns clearfix">
       <time>{{ ExpressiveDate::make($article->created_at)->getRelativeDate() }}</time>
-      <ul>
-        @foreach( $article->tags as $tag )
-        <li><a href="/tag/{{$tag->url_name}}"><span>#</span>{{ $tag->name }}</a></li>
-        @endforeach
+      <ul class="tags">
+	@foreach( $article->tags as $tag )	
+        <li class="primary badge"><i class="icon-tag"></i><a href="/tag/{{$tag->url_name}}">{{ $tag->name }}</a></li><br />
+	@endforeach
       </ul>
     </aside>
 
