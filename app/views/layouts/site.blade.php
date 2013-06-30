@@ -43,11 +43,6 @@
 
         <aside class="four columns" id="gsidebar">
           @section('sidebar')
-          <ul class="links">
-            <li id="rss"><a href="/feed"><i class="icon-rss"></i>RSS</a></li>
-            <li id="twitter"><a href="https://twitter.com/fideloper"><i class="icon-twitter"></i>@Fideloper</a></li>
-            <li id="twitter"><a href="https://github.com/fideloper"><i class="icon-github"></i>Github</a></li>
-          </ul>
           @show
         </aside>
 
@@ -59,7 +54,11 @@
     <footer id="gfoot">
       <section class="row">
         <div class="twelve columns">
-          <a href="http://twitter.com/fideloper" title="twitter">@fideloper</a>
+	  <ul class="links">
+            <li id="rss"><a href="/feed"><i class="icon-rss"></i>RSS</a></li>
+            <li id="twitter"><a href="https://twitter.com/fideloper"><i class="icon-twitter"></i>@Fideloper</a></li>
+            <li id="twitter"><a href="https://github.com/fideloper"><i class="icon-github"></i>Github</a></li>
+          </ul>
         </div>
       </section>
     </footer>
