@@ -82,7 +82,6 @@ body {
 
 .meta time {
     display: block;
-    margin-top: 16px;
     font-family: 'Times New Roman', Times, serif;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -96,6 +95,13 @@ body {
 
 .meta li {
     line-height: 20px;
+    float: left;
+    margin-right: 20px;
+}
+
+.meta.tags {
+    display: block;
+    height: 40px;
 }
 
 #gsidebar li {
@@ -211,11 +217,15 @@ aside ul {
         margin: 20px 0;
     }
 
-    .meta time {
+    .meta {
         float: left;
         margin-right: 12px;
         line-height: 26px;
 	margin-top: 0;
+    }
+
+    .meta li, .tags.meta li {
+	float: left;
     }
 
     aside ul {

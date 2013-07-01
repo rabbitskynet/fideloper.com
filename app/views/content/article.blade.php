@@ -28,17 +28,14 @@
 @section('content')
 <article class="twelve columns post single">
   <div class="row">
-    <aside class="meta four columns clearfix">
-      <time>{{ ExpressiveDate::make($article->created_at)->getRelativeDate() }}</time>
-      <ul class="tags">
-	@foreach( $article->tags as $tag )	
-        <li class="primary badge"><i class="icon-tag"></i><a href="/tag/{{$tag->url_name}}">{{ $tag->name }}</a></li>
-	@endforeach
-      </ul>
-    </aside>
-
-    <div class="content twelve columns">
+    <div class="content">
         <h2 class="title">{{ $article->title }}</h2>
+        <ul class="tags meta">
+	    <li class="time"><time>{{ ExpressiveDate::make($article->created_at)->getRelativeDate() }}</time></li>
+            @foreach( $article->tags as $tag )
+            <li class="primary badge"><i class="icon-tag"></i><a href="/tag/{{$tag->url_name}}">{{ $tag->name }}</a></li>
+            @endforeach
+        </ul>
         {{ \Michelf\MarkdownExtra::defaultTransform($article->content) }}
 
         @if ( $context['where'] !== 'admin' )
