@@ -30,12 +30,8 @@
 
     @section('header')
     <header class="row" id="gheader">
-      <div class="four columns" id="brand">
-        <h1><a href="/">Fideloper</a></h1>
-        <p class="whoami">Lead dev @digitalsurgeons. I do LAMP, Laravel, Nodejs, Python, and lots of server stuff.</p>
-      </div>
-      <div class="four columns push_eight" id="avatar">
-        <a href="/"><img src="/static/facebook.png" alt="" /></a>
+      <div class="sixteen columns" id="avatar">
+        <a href="/"><h1>Fideloper</h1><img src="/static/fideloper_circle_sm.jpg" alt="" /></a>
       </div>
     </header>
     @show
@@ -47,11 +43,6 @@
 
         <aside class="four columns" id="gsidebar">
           @section('sidebar')
-          <ul class="links">
-            <li id="rss"><a href="/feed"><i class="icon-rss"></i>RSS</a></li>
-            <li id="twitter"><a href="https://twitter.com/fideloper"><i class="icon-twitter"></i>@Fideloper</a></li>
-            <li id="twitter"><a href="https://github.com/fideloper"><i class="icon-github"></i>Github</a></li>
-          </ul>
           @show
         </aside>
 
@@ -63,7 +54,11 @@
     <footer id="gfoot">
       <section class="row">
         <div class="twelve columns">
-          <a href="http://twitter.com/fideloper" title="twitter">@fideloper</a>
+	  <ul class="links">
+            <li id="rss"><a href="/feed"><i class="icon-rss"></i>RSS</a></li>
+            <li id="twitter"><a href="https://twitter.com/fideloper"><i class="icon-twitter"></i>@Fideloper</a></li>
+            <li id="twitter"><a href="https://github.com/fideloper"><i class="icon-github"></i>Github</a></li>
+          </ul>
         </div>
       </section>
     </footer>
