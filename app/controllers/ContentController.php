@@ -1,5 +1,8 @@
 <?php
 
+use Fideloper\Storage\Article\ArticleInterface;
+use Fideloper\Storage\Tag\TagInterface;
+
 class ContentController extends BaseController {
 
 	protected $layout = 'layouts.site';
@@ -7,7 +10,7 @@ class ContentController extends BaseController {
 	protected $article;
 	protected $tag;
 
-	public function __construct(Fideloper\Storage\Article\ArticleInterface $article, Fideloper\Storage\Tag\TagInterface $tag)
+	public function __construct(ArticleInterface $article, TagInterface $tag)
 	{
 		$this->article = $article;
 		$this->tag = $tag;
