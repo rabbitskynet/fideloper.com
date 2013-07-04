@@ -3,6 +3,9 @@
 $fideloper-blue: #4ea3d0;
 $fideloper-alt: #444444;
 $fideloper-accent: #cccccc;
+$fideloper-age-new: #89e789;
+$fideloper-age-medium: #fafb98;
+$fideloper-age-old: #ffc3c3;
 
 h1 a:hover,
 h2 a:hover,
@@ -165,6 +168,30 @@ aside ul {
     padding-top: 0;
 }
 
+article .age {
+    border-left: 1px solid $fideloper-accent;
+    border-right: 1px solid $fideloper-accent;
+    height: 2px;
+}
+
+.age .timeline {
+    background-color: $fideloper-age-new;
+    display: block;
+    height: 2px;
+}
+
+.age .timeline.new {
+    background-color: $fideloper-age-new;
+}
+
+.age .timeline.medium {
+    background-color: $fideloper-age-medium;
+}
+
+.age .timeline.old {
+    background-color: $fideloper-age-old;
+}
+
 #gfoot {
     border-top: 1px solid $fideloper-accent;
     margin: 30px 0;
@@ -253,7 +280,7 @@ aside ul {
    .meta.tags .time {
         width: 100%;
         margin-bottom: 3px;
-    } 
+    }
 }
 
 .post pre{ margin-bottom:20px }

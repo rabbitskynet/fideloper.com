@@ -31,7 +31,7 @@
     <div class="content">
         <h2 class="title">{{ $article->title }}</h2>
         <ul class="tags meta clearfix">
-	    <li class="time"><time>{{ ExpressiveDate::make($article->created_at)->getRelativeDate() }}</time></li>
+	    <li class="time"><time>{{ ViewHelper::relativeDate($article) }}</time></li>
             @foreach( $article->tags as $tag )
             <li class="primary badge"><i class="icon-tag"></i><a href="/tag/{{$tag->url_name}}">{{ $tag->name }}</a></li>
             @endforeach

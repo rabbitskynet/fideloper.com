@@ -6,6 +6,7 @@
   <article class="post">
     <h3><a href="/{{ $article->url_title }}">{{ $article->title }}</a></h3>
     {{ \Michelf\MarkdownExtra::defaultTransform($article->excerpt) }}
+    <div class="age"><a class="timeline {{ ViewHelper::ageClass($article) }}" style="width:{{ ViewHelper::percOfYear($article) }}%;" title="{{ ViewHelper::daysOld($article) }} days old"></a></div>
   </article><!-- end article -->
   @endforeach
 
