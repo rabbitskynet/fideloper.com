@@ -37,25 +37,25 @@ class Article implements ArticleInterface {
                             ->first();
     }
 
-    public function getByTag($tag)
+    public function getByTag($tag, $limit=10)
     {
-        $foundTag = $this->tag->with(['articles' => function($query) {
-            $query->where('status_id', 1)
-		  ->orderBy('created_at', 'desc');
-        }])->where('url_name', $tag)
-           ->first();
+        $foundTag = $this->tag->where('url_name', $tag)->first();
 
         if( !$foundTag )
         {
-            return [];
+            return array();
         }
 
-        return $foundTag->articles;
+        return $this->article->join('tags_articles', 'articles.id', '=', 'tags_articles.article_id')
+                                  ->where('tags_articles.tag_id', $foundTag->id)
+                                  ->where('articles.status_id', 1)
+                                  ->orderBy('articles.created_at', 'desc')
+                                  ->paginate($limit);
     }
 
     public function getByDate($monthyear)
     {
-        return [];
+        return array();
     }
 
 }
