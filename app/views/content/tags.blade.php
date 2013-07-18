@@ -8,6 +8,8 @@
     {{ \Michelf\MarkdownExtra::defaultTransform($article->excerpt) }}
   </article><!-- end article -->
   @endforeach
+
+  {{ $articles->links() }}
 </section>
 @stop
 
