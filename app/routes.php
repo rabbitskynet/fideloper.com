@@ -55,8 +55,63 @@ Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
 
 
 /**
+* Routing for Laravel Cookbook
+*/
+
+Route::get('/laravel-cookbook', function()
+{
+    $status = '';
+
+    if( Session::has('status') )
+    {
+        $status = Session::get('status');
+    }
+
+    return View::make('cookbook.form')->with(array(
+        'status' => $status
+    ));
+});
+
+Route::post('/laravel-cookbook', function()
+{
+    // Validate
+    $validator = Validator::make(
+        array(
+            'description' => Input::get('description'),
+            'name' => Input::get('name'),
+        ),
+        array(
+            'description' => 'required',
+            'name' => 'required',
+
+        )
+    );
+
+    if( $validator->fails() )
+    {
+        // Redirect with error
+        return Redirect::to('/laravel-cookbook')->withInput(Input::all())->withErrors($validator)->with('status', 'error');
+    }
+
+    // Sanitize
+    $description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
+    $name  = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
+
+    // Save description to db
+    Idea::create(array(
+        'name' => $name,
+        'idea' => $description,
+    ));
+
+    // Redirect with success
+    return Redirect::to('/laravel-cookbook')->with('status', 'success');
+});
+
+
+/**
 * Routing to handle 301 redirects from Tumblr URLs
 */
+
 Route::get('/post/{id}/{slug}', function($id, $slug) {
 
     return Redirect::to('/'.$slug, 301);
