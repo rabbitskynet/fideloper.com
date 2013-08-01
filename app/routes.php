@@ -53,6 +53,39 @@ Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
     Route::resource('user', 'UserController');
 });
 
+Route::get('/laravel-cookbook', function()
+{
+    $status = '';
+
+    if( Session::has('status') )
+    {
+        $status = Session::get('status');
+    }
+
+    return View::make('cookbook.form')->with(array(
+        'status' => $status
+    ));
+});
+
+Route::post('/laravel-cookbook', function()
+{
+    $validator = Validator::make(
+        array('descr' => Input::get('descr')),
+        array('descr' => 'required')
+    );
+
+    if( $validator->fails() )
+    {
+        return Redirect::to('/laravel-cookbook')->withErrors($validator)->with('status', 'error');
+    }
+
+    $descr = filter_var(Input::get('descr'), FILTER_SANITIZE_STRING);
+
+    // Save descr to db
+
+    // Redirect with flash message
+    return Redirect::to('/laravel-cookbook')->with('status', 'success');
+});
 
 /**
 * Routing to handle 301 redirects from Tumblr URLs
