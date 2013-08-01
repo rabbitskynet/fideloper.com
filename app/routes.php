@@ -75,8 +75,8 @@ Route::get('/laravel-cookbook', function()
 Route::post('/laravel-cookbook', function()
 {
     $validator = Validator::make(
-        array('descr' => Input::get('descr')),
-        array('descr' => 'required')
+        array('description' => Input::get('description')),
+        array('description' => 'required')
     );
 
     if( $validator->fails() )
@@ -84,9 +84,9 @@ Route::post('/laravel-cookbook', function()
         return Redirect::to('/laravel-cookbook')->withErrors($validator)->with('status', 'error');
     }
 
-    $descr = filter_var(Input::get('descr'), FILTER_SANITIZE_STRING);
+    $description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
 
-    // Save descr to db
+    // Save description to db
 
     // Redirect with flash message
     return Redirect::to('/laravel-cookbook')->with('status', 'success');
