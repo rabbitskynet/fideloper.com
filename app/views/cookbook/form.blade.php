@@ -10,6 +10,9 @@
     @elseif( $status === 'error' )
     <div class="danger alert">
         <ul style="padding-top:6px;">
+            @foreach($errors->get('name') as $error)
+            <li>{{ $error }}</li>
+            @endforeach
             @foreach($errors->get('description') as $error)
             <li>{{ $error }}</li>
             @endforeach
@@ -31,8 +34,11 @@
             <h5 for="descr" style="margin-bottom:10px;"><strong>What common challenges would you like to see handled in a <code>maintainable</code>, <code>professional way</code> in Laravel 4?</strong></h5>
             <ul class="nine columns" style="margin-left:0;">
                 <li class="field">
-                    <textarea maxlength="255" rows="4" class="input textarea" id="descr" name="description" placeholder="Briefly describe the coding challenge"></textarea>
-                    <p class="small" style="font-size:12px;"><em>Limit 255 characters. Consider using Markdown.</em></p>
+                    <input type="text" class="input" name="name" placeholder="Your name or @twitter" maxlength="255" value="{{ Input::old('name') }}" />
+                </li>
+                <li class="field">
+                    <textarea maxlength="255" rows="4" class="input textarea" id="descr" name="description" placeholder="Briefly describe the coding challenge">{{ Input::old('description') }}</textarea>
+                    <p class="small" style="font-size:12px;"><em>All fields required. Limit 255 characters. Consider using Markdown.</em></p>
                 </li>
                 <li>
                     <div class="medium primary btn icon-right entypo icon-camera"><input type="submit" value="Submit"></div>

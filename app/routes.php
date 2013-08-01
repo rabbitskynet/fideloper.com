@@ -75,13 +75,20 @@ Route::get('/laravel-cookbook', function()
 Route::post('/laravel-cookbook', function()
 {
     $validator = Validator::make(
-        array('description' => Input::get('description')),
-        array('description' => 'required')
+        array(
+            'description' => Input::get('description'),
+            'name' => Input::get('name'),
+        ),
+        array(
+            'description' => 'required',
+            'name' => 'required',
+
+        )
     );
 
     if( $validator->fails() )
     {
-        return Redirect::to('/laravel-cookbook')->withErrors($validator)->with('status', 'error');
+        return Redirect::to('/laravel-cookbook')->withInput(Input::all())->withErrors($validator)->with('status', 'error');
     }
 
     $description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
