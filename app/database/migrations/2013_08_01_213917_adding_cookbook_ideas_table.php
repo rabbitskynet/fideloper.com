@@ -15,8 +15,8 @@ class AddingCookbookIdeasTable extends Migration {
 		Schema::create('cookbook', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->varchar('name');
-			$table->varchar('idea');
+			$table->string('name');
+			$table->string('idea');
 			$table->softDeletes();
 			$table->timestamps();
 		});
