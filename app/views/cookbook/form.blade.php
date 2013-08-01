@@ -16,6 +16,9 @@
             @foreach($errors->get('description') as $error)
             <li>{{ $error }}</li>
             @endforeach
+            @foreach($errors->get('human') as $error)
+            <li>{{ $error }}</li>
+            @endforeach
         </ul>
     </div>
     @endif
@@ -39,6 +42,12 @@
                 <li class="field">
                     <textarea maxlength="255" rows="4" class="input textarea" id="descr" name="description" placeholder="Briefly describe the coding challenge">{{ Input::old('description') }}</textarea>
                     <p class="small" style="font-size:12px;"><em>All fields required. Limit 255 characters. Consider using Markdown.</em></p>
+                </li>
+                <li class="field ">
+                    <label for="human">Do some math:</label><input class="input" name="human" id="human" placeholder="1+1" style="width:50px;" value="" />
+                </li>
+                <li class="field hh">
+                    <input class="input" name="email" id="email" placeholder="email" value="" />
                 </li>
                 <li>
                     <div class="medium primary btn icon-right entypo icon-camera"><input type="submit" value="Submit"></div>
