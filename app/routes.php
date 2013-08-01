@@ -74,6 +74,7 @@ Route::get('/laravel-cookbook', function()
 
 Route::post('/laravel-cookbook', function()
 {
+    // Validate
     $validator = Validator::make(
         array(
             'description' => Input::get('description'),
@@ -88,14 +89,21 @@ Route::post('/laravel-cookbook', function()
 
     if( $validator->fails() )
     {
+        // Redirect with error
         return Redirect::to('/laravel-cookbook')->withInput(Input::all())->withErrors($validator)->with('status', 'error');
     }
 
+    // Sanitize
     $description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
+    $name  = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
 
     // Save description to db
+    Idea::create(array(
+        'name' => $name,
+        'idea' => $description,
+    ));
 
-    // Redirect with flash message
+    // Redirect with success
     return Redirect::to('/laravel-cookbook')->with('status', 'success');
 });
 
