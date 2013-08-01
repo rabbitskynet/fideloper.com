@@ -31,7 +31,8 @@
             <h5 for="descr" style="margin-bottom:10px;"><strong>What common challenges would you like to see handled in a <code>maintainable</code>, <code>professional way</code> in Laravel 4?</strong></h5>
             <ul class="nine columns" style="margin-left:0;">
                 <li class="field">
-                    <textarea rows="4" class="input textarea" id="descr" name="description" placeholder="Briefly describe the coding challenge"></textarea>
+                    <textarea maxlength="255" rows="4" class="input textarea" id="descr" name="description" placeholder="Briefly describe the coding challenge"></textarea>
+                    <p class="small" style="font-size:12px;"><em>Limit 255 characters. Consider using Markdown.</em></p>
                 </li>
                 <li>
                     <div class="medium primary btn icon-right entypo icon-camera"><input type="submit" value="Submit"></div>
