@@ -10,6 +10,7 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="/{{$adminGroup}}/user">Users</a></li>
+              <li><a href="/{{$adminGroup}}/cookbook">Cookbook Ideas</a></li>
               <li><a href="/{{$adminGroup}}/article">All Articles</a></li>
               <li><a href="/{{$adminGroup}}/article/create">New Article</a></li>
             </ul>

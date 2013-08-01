@@ -51,6 +51,7 @@ Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
     Route::resource('/', 'AdminController');
     Route::resource('article', 'ArticleController');
     Route::resource('user', 'UserController');
+    Route::resource('cookbook', 'CookbookController');
 });
 
 
