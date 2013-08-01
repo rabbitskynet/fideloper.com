@@ -74,16 +74,32 @@ Route::get('/laravel-cookbook', function()
 
 Route::post('/laravel-cookbook', function()
 {
+    // Honeypot
+    if( Input::get('email') )
+    {
+        throw new Symfony\Component\HttpKernel\Exception\HttpException(500, 'You are a robot');
+    }
+
+    // Human
+    Validator::extend('human', function($attribute, $value, $parameters)
+    {
+        return $value == '2';
+    });
+
     // Validate
     $validator = Validator::make(
         array(
             'description' => Input::get('description'),
             'name' => Input::get('name'),
+            'human' => Input::get('human'),
         ),
         array(
             'description' => 'required',
             'name' => 'required',
-
+            'human' => 'required|integer|human',
+        ),
+        array(
+            'human' => 'You must do the math correctly',
         )
     );
 
