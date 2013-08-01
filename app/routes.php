@@ -53,6 +53,11 @@ Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
     Route::resource('user', 'UserController');
 });
 
+
+/**
+* Routing for Laravel Cookbook
+*/
+
 Route::get('/laravel-cookbook', function()
 {
     $status = '';
@@ -87,9 +92,11 @@ Route::post('/laravel-cookbook', function()
     return Redirect::to('/laravel-cookbook')->with('status', 'success');
 });
 
+
 /**
 * Routing to handle 301 redirects from Tumblr URLs
 */
+
 Route::get('/post/{id}/{slug}', function($id, $slug) {
 
     return Redirect::to('/'.$slug, 301);
