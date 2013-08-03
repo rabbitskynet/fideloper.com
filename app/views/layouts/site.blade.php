@@ -19,7 +19,7 @@
 
   <link type="text/plain" rel="author" href="http://fideloper.com/humans.txt" />
 
-  <link rel="stylesheet" href="/static/css/gumby.css?v=1.0">
+  <link rel="stylesheet" href="/static/css/gumby.css?v=1.1">
   <script src="/static/js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
