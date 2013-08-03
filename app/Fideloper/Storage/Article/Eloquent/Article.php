@@ -1,29 +1,45 @@
 <?php namespace Fideloper\Storage\Article\Eloquent;
 
 use Fideloper\Storage\Article\ArticleInterface;
+use Fideloper\Cache\CacheInterface;
 
 class Article implements ArticleInterface {
 
     protected $article;
     protected $tag;
+    protected $cache;
 
-    public function __construct()
+    public function __construct(CacheInterface $cache)
     {
         $this->article = new \Article;
         $this->tag = new \Tag;
+        $this->cache = $cache;
 
     }
 
     public function getRecent($limit=3)
     {
-        return $this->article->where('status_id', 1)
+        // Need to cache per $limit set
+        if( $this->cache->has('recent.articles.'.md5($limit)) )
+        {
+            return $this->cache->get('recent.articles.'.md5($limit));
+        }
+
+        $articles = $this->article->where('status_id', 1)
                             ->orderBy('created_at', 'desc')
                             ->take($limit)
                             ->get();
+
+        $this->cache->put('recent.articles.'.md5($limit), $articles);
+
+        return $articles;
     }
 
     public function getPaginated($limit=10)
     {
+        // Cacheing this is trickier due to needing paged attributes
+        // Would need page service to handle changes in pagination styles
+        // for maintainability
         return $this->article->where('status_id', 1)
                             ->orderBy('created_at', 'desc')
                             ->paginate($limit);
@@ -31,10 +47,20 @@ class Article implements ArticleInterface {
 
     public function getBySlug($slug)
     {
-        return $this->article->with('tags')
+        // Need to cache each article separately
+        if( $this->cache->has('slug.article.'.md5($slug)) )
+        {
+            return $this->cache->get('slug.article.'.md5($slug));
+        }
+
+        $article =  $this->article->with('tags')
                             ->where('status_id', 1)
                             ->where('url_title', $slug)
                             ->first();
+
+        $this->cache->put('slug.article.'.md5($slug), $article);
+
+        return $article;
     }
 
     public function getByTag($tag, $limit=10)
