@@ -3,7 +3,7 @@
 // Laravel Cache facade
 use Cache;
 
-class Memcached implements CacheInterface {
+class LaravelCache implements CacheInterface {
 
 	protected $cachekey;
 	protected $minutes;
