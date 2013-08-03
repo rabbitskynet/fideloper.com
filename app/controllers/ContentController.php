@@ -123,7 +123,7 @@ class ContentController extends BaseController {
 		return $date;
 	}
 
-	public function feed()
+	public function feed($kind=null)
 	{
 		$feed = new Suin\RSSWriter\Feed();
 		$channel = new Suin\RSSWriter\Channel();
@@ -142,9 +142,15 @@ class ContentController extends BaseController {
 
 			$item
 			    ->title( $article->title )
-			    ->description( $article->excerpt )
 			    ->url( 'http://fideloper.com/'.$article->url_title )
 			    ->appendTo( $channel );
+
+			if($kind === 'full')
+			{
+				$item->description( $article->content );
+			} else {
+				$item->description( $article->excerpt );
+			}
 		}
 
 		return Response::make($feed, 200, ['Content-Type' => 'application/xml']);
