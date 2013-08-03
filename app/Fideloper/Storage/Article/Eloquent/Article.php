@@ -1,16 +1,19 @@
 <?php namespace Fideloper\Storage\Article\Eloquent;
 
 use Fideloper\Storage\Article\ArticleInterface;
+use Fideloper\Cache\CacheInterface;
 
 class Article implements ArticleInterface {
 
     protected $article;
     protected $tag;
+    protected $cache;
 
-    public function __construct()
+    public function __construct(CacheInterface $cache)
     {
         $this->article = new \Article;
         $this->tag = new \Tag;
+        $this->cache = $cache;
 
     }
 
