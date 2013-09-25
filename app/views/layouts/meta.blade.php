@@ -14,4 +14,7 @@
 <meta itemprop="name" content="{{ $head->last('title') }}">
 <meta itemprop="description" content="{{ $head->last('description') }}">
 <meta itemprop="image" content="http://fideloper.com/fideloper.jpg">
+
+<!-- Twitter Metadata /-->
+<meta property="twitter:account_id" content="196841165" />
 @stop
