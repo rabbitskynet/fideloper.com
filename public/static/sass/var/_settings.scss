@@ -3,9 +3,9 @@
 
 
 // Grid Settings
-$row-max-width: 940px !default;    				// 940px
+$row-max-width: 1200px !default;    				// 940px
 $gutter-in-px: 20px !default;      				// 20px
-$cols: 12 !default;              				// 12 Column Default Grid
+$cols: 16 !default;              				// 12 Column Default Grid
 $hybrid: 16 !default;							// 16 Column Default Hybrid Grid
 
 // Responsiveness Settings
@@ -68,11 +68,11 @@ $absurd: ms(10);
 
 // Typography Colors
 $header-font-color: #444444 !default;
-$header-link-color: #d04526 !default;
-$header-link-hover-color: #c03d20 !default;
+$header-link-color: #444444 !default;
+$header-link-hover-color: #4ea3d0 !default;
 $body-font-color: #555555 !default;
-$body-link-color: #d04526 !default;
-$body-link-hover-color: #c03d20 !default;
+$body-link-color: #4ea3d0 !default;
+$body-link-hover-color: #444444 !default;
 
 // User Interface Colors
 $global-bg-color: #fff;
