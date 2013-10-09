@@ -5,9 +5,9 @@
   @if( App::environment() === 'production' )
   <script src="/static/js/app.min.js"></script>
   @else
-  <script src="/static/js/libs/gumby.min.js"></script>
-  <script src="/static/js/plugins.js"></script>
-  <script src="/static/js/main.js"></script>
+  <script src="/static/bower_components/gumby/js/libs/gumby.min.js"></script>
+  <script src="/static/bower_components/gumby/js/plugins.js"></script>
+  <script src="/static/bower_components/gumby/js/main.js"></script>
   @endif
   <!-- end scripts-->
 
