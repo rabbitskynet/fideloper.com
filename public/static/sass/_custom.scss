@@ -1,8 +1,6 @@
-// Your custom SCSS should be written here...
-
-$fideloper-blue: #4ea3d0;
-$fideloper-alt: #444444;
-$fideloper-accent: #cccccc;
+p {
+    margin-bottom: ($base-line-height+10) / 2;
+}
 
 h1 a:hover,
 h2 a:hover,
@@ -230,11 +228,11 @@ aside ul {
     .meta {
         margin-right: 12px;
         line-height: 26px;
-	margin-top: 0;
+    margin-top: 0;
     }
 
     .meta li, .tags.meta li {
-	float: left;
+    float: left;
     }
 
     aside ul {
@@ -253,7 +251,7 @@ aside ul {
    .meta.tags .time {
         width: 100%;
         margin-bottom: 3px;
-    } 
+    }
 }
 
 .post pre{ margin-bottom:20px }
