@@ -1,17 +1,14 @@
 <?php namespace Fideloper\Storage\Tag\Eloquent;
 
 use Fideloper\Storage\Tag\TagInterface;
-use Fideloper\Cache\CacheInterface;
 
 class Tag implements TagInterface {
 
     protected $tag;
-    protected $cache;
 
-    public function __construct(CacheInterface $cache)
+    public function __construct()
     {
         $this->tag = new \Tag;
-        $this->cache = $cache;
 
     }
 
