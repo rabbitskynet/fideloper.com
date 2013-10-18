@@ -20,7 +20,11 @@ class ContentController extends BaseController {
 	*/
 	public function index()
 	{
-		$articles = $this->article->getPaginated();
+		$page = Input::get('page', 1);
+		$perPage = 10;
+
+		$pagiData = $this->article->getPaginated($page, $perPage);
+		$articles = Paginator::make($pagiData->items, $pagiData->totalItems, $pagiData->limit);
 
 		$tags = $this->tag->getPopular();
 
@@ -85,7 +89,11 @@ class ContentController extends BaseController {
 	*/
 	public function tag($tag)
 	{
-		$articles = $this->article->getByTag($tag);
+		$page = Input::get('page', 1);
+		$perPage = 10;
+
+		$pagiData = $this->article->getByTag($tag, $page, $perPage);
+		$articles = Paginator::make($pagiData->items, $pagiData->totalItems, $pagiData->limit);
 
 		if( count($articles) === 0 )
 		{
