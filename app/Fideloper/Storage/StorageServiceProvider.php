@@ -1,9 +1,11 @@
 <?php namespace Fideloper\Storage;
 
-use Illuminate\Support\ServiceProvider;
-use Fideloper\Storage\Article\Eloquent\Article;
-use Fideloper\Storage\Tag\Eloquent\Tag;
 use Fideloper\Cache\LaravelCache;
+use Illuminate\Support\ServiceProvider;
+use Fideloper\Storage\Tag\Eloquent\Tag as EloquentTag;
+use Fideloper\Storage\Article\CacheDecorator as ArticleCacheDecorator;
+use Fideloper\Storage\Article\Eloquent\Article as EloquentArticle;
+
 
 class StorageServiceProvider extends ServiceProvider {
 
@@ -18,12 +20,13 @@ class StorageServiceProvider extends ServiceProvider {
 
         $app->bind('Fideloper\Storage\Article\ArticleInterface', function()
         {
-            return new Article( new LaravelCache('articles', 10) );
+            $article = new EloquentArticle;
+            return new ArticleCacheDecorator($article, new LaravelCache('articles', 10));
         });
 
         $app->bind('Fideloper\Storage\Tag\TagInterface', function()
         {
-            return new Tag( new LaravelCache('tags', 10) );
+            return new EloquentTag( new LaravelCache('tags', 10) );
         });
     }
 
