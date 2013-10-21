@@ -2,15 +2,6 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
 
-  @if( App::environment() === 'production' )
-  <script src="/static/js/app.min.js"></script>
-  @else
-  <script src="/static/bower_components/gumby/js/libs/gumby.min.js"></script>
-  <script src="/static/bower_components/gumby/js/plugins.js"></script>
-  <script src="/static/bower_components/gumby/js/main.js"></script>
-  @endif
-  <!-- end scripts-->
-
   <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js" type="text/javascript"></script>
   <script type="text/javascript">
       $(function()
