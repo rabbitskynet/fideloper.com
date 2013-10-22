@@ -50,7 +50,7 @@ class CacheDecorator extends DecoratorAbstract {
 
         if( $this->cache->has($key) )
         {
-            return $this->cache->get('slug.article.'.md5($slug));
+            return $this->cache->get($key);
         }
 
         $article = $this->nextItem->getBySlug($slug);
