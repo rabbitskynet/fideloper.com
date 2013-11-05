@@ -62,7 +62,7 @@ class CacheDecorator extends DecoratorAbstract {
 
     public function getByTag($tag, $page=1, $limit=10)
     {
-        $key = md5('paginated.taggedarticles.'.'page.'.$page.'.'.$limit);
+        $key = md5('paginated.taggedarticles.'.'page.'.$page.'.'.$limit.'.'.$tag);
 
         if( $this->cache->has($key) )
         {
