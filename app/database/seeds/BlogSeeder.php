@@ -103,6 +103,7 @@ LOREM;
             $article->user_id       = User::first()->id;
             $article->status_id     = Status::first()->id;
             $article->title         = 'My awesome post number: ' . $i;
+            $article->url_title     = 'my_awesome_post_number_' . $i;
             $article->excerpt       = substr($loremIpsum, 0, 100);
             $article->content       = $loremIpsum;
             $article->save();
