@@ -20,7 +20,9 @@
   <link type="text/plain" rel="author" href="http://fideloper.com/humans.txt" />
 
   <link rel="stylesheet" href="/static/css/gumby.css?v=1.1">
+  <!--[if lte IE 8]>
   <script src="/static/bower_components/gumby/js/libs/modernizr-2.6.2.min.js"></script>
+  <![endif]-->
 </head>
 
 <body>
