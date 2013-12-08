@@ -22,4 +22,5 @@
 <meta name="twitter:title" content="{{ $head->last('title') }}" />
 <meta name="twitter:description" content="{{ $head->last('description') }}" />
 <meta name="twitter:image" content="http://fideloper.com/fideloper.jpg" />
+<meta name="twitter:domain" content="fideloper.com">
 @stop
