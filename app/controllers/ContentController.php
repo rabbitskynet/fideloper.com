@@ -42,6 +42,9 @@ class ContentController extends BaseController {
 
 	/**
 	* Display specific article
+	*
+	* @todo Is there a better way to rid of Markdown syntax but not have HTML
+	*       for meta tag description?
 	*/
 	public function article($slug)
 	{
@@ -62,8 +65,9 @@ class ContentController extends BaseController {
 		}
 
 		$head = App::make('headdata');
-		$head->add('title', $article->title.' | Fideloper');
+		$head->add('title', $article->title);
 		$head->add('keywords', implode(',', $tags));
+		$head->add('description', trim(strip_tags(\Michelf\MarkdownExtra::defaultTransform($article->excerpt))));
 
 		// Output Article
 		$this->layout->content = View::make('content.article', [
