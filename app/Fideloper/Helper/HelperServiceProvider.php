@@ -16,8 +16,8 @@ class HelperServiceProvider extends ServiceProvider {
         {
             return new Headdata([
                 'title' => 'Fideloper',
-                'keywords' => 'tech,laravel,api,ubuntu,linux,server,nix,cli,framework,php',
-                'description' => "Lead developer @digitalsurgeons. I do LAMP, Laravel, Nodejs, Python, and lots of server stuff."
+                'keywords' => 'php,python,nodejs,laravel,api,ubuntu,linux,server,nix,cli,framework',
+                'description' => "Coding and servers, lots of Laravel. Open-sorcery."
             ]);
         });
     }
