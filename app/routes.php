@@ -19,7 +19,7 @@ $adminGroup = Config::get('admin.group');
 
 Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
 {
-    Route::get('login', function() use($adminGroup)
+    Route::get('/login', function() use($adminGroup)
     {
         return View::make('layouts.admin')
             ->with('body_class', 'admin login')
@@ -27,7 +27,7 @@ Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
             ->nest('content', 'admin.login', ['adminGroup' => $adminGroup]);
     });
 
-    Route::post('login', function() use ($adminGroup)
+    Route::post('/login', function() use ($adminGroup)
     {
         //Test authentication
         $authenticated = Auth::attempt( ['email' => Input::get('email'), 'password' => Input::get('password')] );
@@ -41,7 +41,7 @@ Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
         }
     });
 
-    Route::get('logout', function()
+    Route::get('/logout', function()
     {
         Auth::logout();
 
