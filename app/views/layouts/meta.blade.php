@@ -17,4 +17,9 @@
 
 <!-- Twitter Metadata /-->
 <meta property="twitter:account_id" content="196841165" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@fideloper" />
+<meta name="twitter:title" content="{{ $head->last('title') }}" />
+<meta name="twitter:description" content="{{ $head->last('description') }}" />
+<meta name="twitter:image" content="http://fideloper.com/fideloper.jpg" />
 @stop
