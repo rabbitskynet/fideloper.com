@@ -109,6 +109,7 @@ return array(
 
 		'Fideloper\Storage\StorageServiceProvider',
 		'Fideloper\Helper\HelperServiceProvider',
+		'Fideloper\Http\HttpServiceProvider',
 
 		'ExpressiveDateServiceProvider',
 
