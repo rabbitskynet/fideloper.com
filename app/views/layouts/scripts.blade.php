@@ -1,14 +1,16 @@
 @section('scripts')
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
-
+  <!--[if lte IE 9]>
+  <script src="/static/bower_components/html5-polyfills/classList.js"></script>
+  <![endif]-->
   <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js" type="text/javascript"></script>
   <script type="text/javascript">
-      $(function()
-      {
-          $('.post pre, table code').addClass('prettyprint');
+      (function(){
+          var codeBlocks = document.querySelectorAll('.post pre, table code');
+          [].forEach.call(codeBlocks, function(codeBlock){
+              codeBlock.classList.add('prettyprint');
+          });
           prettyPrint();
-      });
+      })();
   </script>
 
   <script type="text/javascript">
@@ -31,17 +33,11 @@
   <![endif]-->
 
   <!-- Social Widget Rendering Javascript /-->
-
-  <script src="http://platform.twitter.com/widgets.js"></script>
-  <?php /* Don't need these yet
-  <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
   <script type="text/javascript">
     (function() {
       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-      po.src = 'https://apis.google.com/js/plusone.js';
+      po.src = 'http://platform.twitter.com/widgets.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
     })();
   </script>
-  */ ?>
-  <!-- End Social Widget Rendering Javascript /-->
   @stop
