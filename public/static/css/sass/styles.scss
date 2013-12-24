@@ -1,0 +1,242 @@
+@import 'bourbon/bourbon';
+@import 'bitters/bitters';
+@import 'neat/neat';
+
+$mobile: max-width 480px 2;
+// 1024px/16px = 64em
+$tablet-portrait: min-width em(1024);
+
+body {
+    border-top:12px solid #4ea3d0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    @include outer-container;
+
+    section,
+    #brand {
+        @include row;
+        padding: 0 20px;
+
+        .wide {
+            @include span-columns(12);
+        }
+        .col-main {
+            @include span-columns(12);
+        }
+        aside {
+            @include span-columns(12);
+        }
+        .col-main {
+            @include media($tablet-portrait) {
+                @include span-columns(9);
+            }
+        }
+
+        aside {
+            @include media($tablet-portrait) {
+                @include span-columns(3);
+            }
+        }
+    }
+}
+
+#brand,
+.container #brand {
+    text-align: center;
+    padding: 20px 20px;
+
+    a {
+        background: url(http://fideloper.com/static/fideloper_circle_sm.jpg) no-repeat top left;
+        background-size: 50px 50px;
+        line-height: 50px;
+        padding-left: 55px;
+    }
+}
+
+aside {
+
+    h3 {
+        padding-left: em(23.5);
+    }
+
+    ul {
+        margin-bottom: em(30);
+    }
+
+    li {
+        border-top: 1px dotted $accent-gray; 
+        padding: em(12) 0 em(12) em(30);
+        position: relative;
+
+        i,
+        i.entypo,
+        i.entypo-social {
+            position: absolute;
+            left: 0;
+            top: em(12);
+        }
+    }
+}
+
+.listing article {
+    border-bottom: 1px solid $accent-gray;
+    padding-top: em(20);
+}
+
+.listing article:first-child {
+    padding-top: 0;
+}
+
+.meta,
+.single ul.meta {
+    @include clearfix;
+    border-top: 1px solid $accent-gray;
+    border-bottom: 1px solid $accent-gray;
+    display:block;
+    padding-top: em(10);
+    margin: em(15) 0 em(25) 0;
+    list-style-type: none;
+    min-height: em(40);
+
+    li {
+        float: left;
+        margin-right: em(20);
+        margin-bottom: em(10);
+    }
+}
+
+#disqus_thread {
+    margin-top: em(75);
+    margin-bottom: em(60);
+}
+
+.pagination {
+   margin: em(50) 0; 
+
+    ul {
+        @include clearfix;
+    }
+
+    li {
+        background: #f2f2f2;
+        border: 1px solid #f2f2f2;
+        color: #555;
+        float: left;
+        margin-right: em(6);
+        margin-bottom: em(6);
+    }
+
+}
+
+.badge {
+    padding: 0 em(10);
+    font-size: em(14);
+    -ms-border-radius: em(12);
+    -o-border-radius: em(12);
+    border-radius: em(12); 
+}
+
+.badge:hover {
+    border-color: #e5e5e5;
+}
+
+.badge.primary {
+    background: $blue;
+}
+
+.badge.disabled {
+    background: white;
+}
+
+#foot {
+    border-top: 1px solid $accent-gray;
+    margin: 0 0 em(30) 0;
+    padding-top: em(30);
+
+    li {
+        float: left;
+        margin-right: em(30);
+    }
+}
+
+// Prettyprint
+.post pre {
+    margin-bottom: 20px
+}
+
+code {
+    background-color: #fde9ce
+}
+
+.prettyprint {
+    overflow-x: auto;
+    font-family: Monaco, Consolas, "Lucida Console", monospace;
+    background-color: #333;
+    padding: 1.5em;
+    font-size: .75em;
+    border: 0;
+    color: #e9e4e5;
+    line-height: 1.9em;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box
+}
+
+.prettyprint .pln {
+    color: #e9e4e5
+}
+
+.prettyprint .str {
+    color: #bcd42a
+}
+
+.prettyprint .kwd {
+    color: #4bb1b1
+}
+
+.prettyprint .com {
+    color: #888
+}
+
+.prettyprint .typ {
+    color: #ef7c61
+}
+
+.prettyprint .lit {
+    color: #bcd42a
+}
+
+.prettyprint .pun, .prettyprint .opn, .prettyprint .clo {
+    color: #fff
+}
+
+.prettyprint .tag {
+    color: #4bb1b1
+}
+
+.prettyprint .atn {
+    color: #ef7c61
+}
+
+.prettyprint .atv {
+    color: #bcd42a
+}
+
+.prettyprint .dec, .prettyprint .var {
+    color: #606
+}
+
+.prettyprint .fun {
+    color: red
+}
+
+.prettyprint code {
+    font-family: Monaco, Consolas, "Lucida Console", monospace;
+    background-color: transparent
+}
