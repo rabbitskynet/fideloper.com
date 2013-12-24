@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Article</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <header id="brand">
+                <article class="wide">
+                    <h1><a href="/">Fideloper</a></h1>
+                </article>
+            </header>
+            <section>
+                <div class="col-main single">
+                    <article class="post">
+                        <h1>HTTP Middleware in Laravel 4.1</h1>
+                        <ul class="tags meta clearfix">
+                            <li class="time"><time>1 month ago</time></li>
+                            <li class="primary badge"><i class="entypo tag"></i><a href="/tag/vim">vim</a></li>
+                            <li class="primary badge"><i class="entypo tag"></i><a href="/tag/tmux">tmux</a></li>
+                            <li class="primary badge"><i class="entypo tag"></i><a href="/tag/tmux">tmux</a></li>
+                            <li class="primary badge"><i class="entypo tag"></i><a href="/tag/tmux">tmux</a></li>
+                            <li class="primary badge"><i class="entypo tag"></i><a href="/tag/tmux">tmux</a></li>
+                            <li class="primary badge"><i class="entypo tag"></i><a href="/tag/tmux">tmux</a></li>
+                        </ul>
+                        <p>As of Laravel 4.1, the framework now uses <a href="http://stackphp.com">StackPHP's</a> implementation of Symfony's HttpKernel. This means we can add our own middleware to our HTTP layer!</p>
+
+                        <p>What is middleware good for? Well, lots of things - any logic you  might stick between the request/response life cycle that's not necessarily part of your application logic. For example:</p>
+
+                        <ol>
+                            <li>Adding session support</li>
+                            <li>Parsing query strings</li>
+                            <li>Implementing rate-limiting</li>
+                            <li>Sniffing for bot traffic</li>
+                            <li>Adding logging</li>
+                            <li>Parsing request JSON</li>
+                            <li>Anything else related to the request/response lifecycle</li>
+                        </ol>
+
+                        <h2>Laravel's Implementation</h2>
+
+                        <p>The first thing to know is that to add Middleware to our request/response cycle, the <a href="http://stackoverflow.com/questions/2707401/please-help-me-understand-the-decorator-pattern-with-a-real-world-example">Decorator Pattern</a> is in use.</p>
+
+                        <p>Whether you understand the design pattern or not, this basically just means that each middleware (decorator) we use must implement <code>HttpKernelInterface</code>.</p>
+
+                        <p>Next, we need to know how to add middleware to our app. Luckily, the <code>Foundation/Application</code> has <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Foundation/Application.php#L611">this functionality</a> built-in for us:</p>
+
+                        <pre><code>/**
+ * Add a HttpKernel middleware onto the stack.
+ *
+ * @param  string  $class
+ * @param  array  $parameters
+ * @return \Illuminate\Foundation\Application
+ */
+public function middleware($class, array $parameters = array())
+{
+    $this-&gt;middlewares[] = compact('class', 'parameters');
+
+    return $this;
+}
+</code></pre>
+
+                        <p>Let's create some middleware of our own.</p>
+
+                        <h2>Simple Rate Limiting Example</h2>
+
+                        <p>For the sake of a quick and dirty example (this is both), let's rate limit our site by IP address (you hopefully will come up with a much better or more interesting idea on your own).</p>
+
+                        <p>First, create the rate-limiting class implementing <code>HttpKernelInterface</code>. This will be our middleware. I created this example one within my application library code under the namespace <code>Fideloper\Http</code>:</p>
+
+                        <pre><code>&lt;?php namespace Fideloper\Http;
+
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+
+class RateLimiter implements HttpKernelInterface {
+
+    /**
+     * The wrapped kernel implementation.
+     *
+     * @var \Symfony\Component\HttpKernel\HttpKernelInterface
+     */
+    protected $app;
+
+    /**
+     * Create a new RateLimiter instance.
+     *
+     * @param  \Symfony\Component\HttpKernel\HttpKernelInterface  $app
+     * @return void
+     */
+    public function __construct(HttpKernelInterface $app)
+    {
+        $this-&gt;app = $app;
+    }
+
+    /**
+     * Handle the given request and get the response.
+     *
+     * @implements HttpKernelInterface::handle
+     *
+     * @param  \Symfony\Component\HttpFoundation\Request  $request
+     * @param  int   $type
+     * @param  bool  $catch
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function handle(SymfonyRequest $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
+    {
+        // Handle on passed down request
+        $response = $this-&gt;app-&gt;handle($request, $type, $catch);
+
+        $requestsPerHour = 60;
+
+        // Rate limit by IP address
+        $key = sprintf('api:%s', $request-&gt;getClientIp());
+
+        // Add if doesn't exist
+        // Remember for 1 hour
+        \Cache::add($key, 0, 60);
+
+        // Add to count
+        $count = \Cache::increment($key);
+
+        if( $count &gt; $requestsPerHour )
+        {
+            // Short-circuit response - we're ignoring
+            $response-&gt;setContent('Rate limit exceeded');
+            $response-&gt;setStatusCode(403);
+        }
+
+        $response-&gt;headers-&gt;set('X-Ratelimit-Limit', $requestsPerHour, false);
+        $response-&gt;headers-&gt;set('X-Ratelimit-Remaining', $requestsPerHour-(int)$count, false);
+
+        return $response;
+    }
+
+}
+</code></pre>
+
+                        <p>Because we implement <code>HttpKernelInterface</code>, we need to have a <code>handle</code> method in our class.</p>
+
+                        <p>The <code>handle</code> method will first call the <code>handle</code> method on the previous middleware to get a response object. Understanding why we do this will come from understanding the Decorator Pattern. For now, if that's confusing just know that we get a response which we can act on by calling <code>$this-&gt;app-&gt;handle()</code> in our <code>handle</code> method (non-negotiable).</p>
+
+                        <p>Then we can do some logic around rate limiting. I rate limit based on the IP address, creating a unique cache key based on user IP address. This key will expire after one hour (60 minutes), so our rate count will be valid for that long. After the hour, the count will reset back to zero.</p>
+
+                        <p>If we reach the rate limit, we set the content and status code of the response and return that for the next middleware (or the app) to finally use.</p>
+
+                        <h2>Service Provider</h2>
+
+                        <p>Once we have a middleware in place, we need to use it. For that, I rely on the trusty old service providers. I chose to create this in the same namespace:</p>
+
+                        <pre><code>&lt;?php namespace Fideloper\Http;
+
+use Illuminate\Support\ServiceProvider;
+
+class HttpServiceProvider extends ServiceProvider {
+
+    /**
+     * Register the binding
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this-&gt;app-&gt;middleware( new RateLimiter($this-&gt;app) );
+    }
+
+}
+</code></pre>
+
+                        <p>Note that I call the <code>middleware</code> method on the <code>Application</code> object. I add in the RateLimiter class and pass it an instance of the application, as required by the class.</p>
+
+                        <p>That's it! We've added some HTTP middleware to our application!</p>
+
+                        <h2>Resources</h2>
+
+                        <ul>
+                            <li><a href="http://stackphp.com/">StackPHP</a></li>
+                            <li><a href="http://en.wikipedia.org/wiki/Decorator_pattern">More on the</a> <a href="http://stackoverflow.com/questions/948443/how-to-implement-a-decorator-in-php">Decorator</a> <a href="http://www.sitepoint.com/flexible-view-manipulation-2/">Pattern</a></li>
+                            <li><a href="https://www.google.com/search?hl=en&amp;safe=off&amp;tbo=d&amp;output=search&amp;sclient=psy-ab&amp;q=leaky+bucket+vs+token+bucket">Rate Limiting strategies</a></li>
+                            <li><a href="https://github.com/danapplegate/leaky-bucket-php">PHP Leadky Bucket rate limiting</a></li>
+                        </ul>
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                            var disqus_shortname = 'fideloper';
+                            var disqus_url = 'http://fideloper.com/sample';
+                            var disqus_title = 'sample';
+                            (function() {
+                                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                    </article>
+                </div>
+                <aside>
+                    <h3>Tags</h3>
+                    <ul>
+                        <li><a href="#">Laravel (20)</a></li>
+                        <li><a href="#">Server (11)</a></li>
+                        <li><a href="#">Ubuntu (11)</a></li>
+                        <li><a href="#">API (9)</a></li>
+                        <li><a href="#">CLI (8)</a></li>
+                        <li><a href="#">ETAG (6)</a></li>
+                        <li><a href="#">PHP (4)</a></li>
+                        <li><a href="#">ERROR HANDLING (2)</a></li>
+                    </ul>
+                </aside>
+            </section>
+        </div>
+        <footer id="foot">
+            <div class="container">
+                <section>
+                    <ul class="wide">
+                        <li><a href="#"><i class="entypo rss"></i>RSS</a></li>
+                        <li><a href="#"><i class="entypo-social twitter"></i>@fideloper</a></li>
+                        <li><a href="#"><i class="entypo-social github"></i>fideloper</a></li>
+                    </ul>
+                </section>
+            </div> 
+        </footer>
+            <!--[if lte IE 9]>
+            <script src="/static/bower_components/html5-polyfills/classList.js"></script>
+            <![endif]-->
+            <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js" type="text/javascript"></script>
+            <script type="text/javascript">
+            (function(){
+                var codeBlocks = document.querySelectorAll('.post pre, table code');
+                [].forEach.call(codeBlocks, function(codeBlock){
+                    codeBlock.classList.add('prettyprint');
+                });
+                prettyPrint();
+            })();
+            </script>
+    </body>
+</html>
