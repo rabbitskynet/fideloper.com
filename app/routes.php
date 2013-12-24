@@ -61,6 +61,7 @@ Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
 
 Route::get('/laravel-cookbook', function()
 {
+    return Redirect::to('/');
     $status = '';
 
     if( Session::has('status') )
@@ -75,6 +76,7 @@ Route::get('/laravel-cookbook', function()
 
 Route::post('/laravel-cookbook', function()
 {
+    return Redirect::to('/');
     // Honeypot
     if( Input::get('email') )
     {
