@@ -2,40 +2,38 @@
 
 @if ( $context['where'] === 'admin' )
     @section('adminhead')
-        <nav class="row" id="adminhead">
-            <div class="sixteen columns">
-                <a href="{{ $context['back_link'] }}">&laquo; Back to Edit Article</a>
-            </div>
+        <nav class="col-main">
+            <a href="{{ $context['back_link'] }}">&laquo; Back to Edit Article</a>
         </nav>
     @stop
 @endif
 
 @section('sidebar')
     @parent
-    <ul class="archive">
-        <li class="title"><h5 class="header">Recent Articles</h5></li>
+    <h3>Recent Articles</h3>
+    <ul>
         @foreach($recents as $recent)
-        <li><a href="/{{ $recent->url_title }}"><i class="icon-right-open-mini"></i>{{ $recent->title }}</a></li>
+        <li><a href="/{{ $recent->url_title }}"><i class="entypo chevron-small-right"></i>{{ $recent->title }}</a></li>
         @endforeach
     </ul>
-    <ul class="archive">
-        <li class="title"><h5 class="header">Other Writings</h5></li>
-        <li><a href="http://net.tutsplus.com/tutorials/php/laravel-4-a-start-at-a-restful-api/"><i class="icon-right-open-mini"></i>Laravel 4 REST API</a></li>
-        <li><a href="http://net.tutsplus.com/tutorials/php/how-to-write-testable-and-maintainable-code-in-php/"><i class="icon-right-open-mini"></i>Testable/Maintainable PHP</a></li>
+    <h3>Other Writings</h3>
+    <ul>
+        <li><a href="http://net.tutsplus.com/tutorials/php/laravel-4-a-start-at-a-restful-api/"><i class="entypo chevron-small-right"></i></i>Laravel 4 REST API</a></li>
+        <li><a href="http://net.tutsplus.com/tutorials/php/how-to-write-testable-and-maintainable-code-in-php/"><i class="entypo chevron-small-right"></i></i>Testable/Maintainable PHP</a></li>
     </ul>
 @stop
 
 @section('content')
-<article class="twelve columns post single">
-  <div class="row">
-    <div class="content">
-        <h2 class="title">{{ $article->title }}</h2>
+<div class="col-main single">
+    <article class="post">
+        <h1>{{ $article->title }}</h1>
         <ul class="tags meta clearfix">
-	    <li class="time"><time>{{ ExpressiveDate::make($article->created_at)->getRelativeDate() }}</time></li>
+            <li class="time"><time>{{ ExpressiveDate::make($article->created_at)->getRelativeDate() }}</time></li>
             @foreach( $article->tags as $tag )
-            <li class="primary badge"><i class="icon-tag"></i><a href="/tag/{{$tag->url_name}}">{{ $tag->name }}</a></li>
+            <li class="primary badge"><i class="entypo tag"></i><a href="/tag/{{$tag->url_name}}">{{ $tag->name }}</a></li>
             @endforeach
         </ul>
+
         {{ \Michelf\MarkdownExtra::defaultTransform($article->content) }}
 
         @if ( $context['where'] !== 'admin' )
@@ -56,7 +54,6 @@
         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         @endif
-    </div><!-- end content -->
-  </div>
-</article><!-- end article -->
+    </article>
+</div>
 @stop
