@@ -57,16 +57,20 @@ class BlogSeeder extends Seeder
     {
         $users = array(
             array(
-                'email'     => 'admin@myawesomeblog.com',
-                'password'  => 'secret'
-            )
+                'email'     => 'root@blog.app',
+                'password'  => 'pass'
+            ),
+            array(
+                'email'     => 'mod@blog.app',
+                'password'  => 'word'
+            ),
         );
 
         foreach ($users as $userInfo) {
-            $user = new User();
-            $user->email    = $userInfo['email'];
-            $user->password = md5($userInfo['password']);
-            $user->save();
+            User::create(array(
+                'email' => $userInfo['email'],
+                'password'=> Hash::make($userInfo['password'])
+            ));
             sleep(1); // for non cache trolling
         }
     }

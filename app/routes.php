@@ -36,7 +36,7 @@ Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
             // Logged in!
             return Redirect::to('/'.$adminGroup);
         } else {
-            // Incorrect Login
+            //Incorrect Login
             return Redirect::to('/'.$adminGroup.'/login')->with('auth_error', 'Username or Password Incorrect');
         }
     });
@@ -61,7 +61,7 @@ Route::group(array('prefix' => $adminGroup), function() use($adminGroup)
 
 Route::get('/laravel-cookbook', function()
 {
-    return Redirect::to('/');
+    //return Redirect::to('/');
     $status = '';
 
     if( Session::has('status') )
@@ -76,8 +76,8 @@ Route::get('/laravel-cookbook', function()
 
 Route::post('/laravel-cookbook', function()
 {
-    return Redirect::to('/');
-    // Honeypot
+//    return Redirect::to('/');
+//     Honeypot
     if( Input::get('email') )
     {
         throw new Symfony\Component\HttpKernel\Exception\HttpException(500, 'You are a robot');

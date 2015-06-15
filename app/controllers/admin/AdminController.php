@@ -26,14 +26,14 @@ class AdminController extends BaseController {
 				'articles' => $articles,
 				'adminGroup' => Config::get('admin.group'),
 			]);
-		/*
+
 		$user = Auth::user();
 
 		return View::make('layouts.admin')
 			->with('body_class', 'admin')
 			->nest('nav', 'layouts.admin.nav', ['adminGroup' => Config::get('admin.group')])
 			->nest('content', 'admin.index');
-		*/
+
 	}
 
 }

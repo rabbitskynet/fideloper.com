@@ -141,9 +141,9 @@ class ContentController extends BaseController {
 		$channel = new Suin\RSSWriter\Channel();
 
 		$channel
-		    ->title( "Fideloper" )
-		    ->description( "Lead dev @digitalsurgeons. I do LAMP, Laravel, Nodejs, Python, and lots of server stuff." )
-		    ->url( 'http://fideloper.com' )
+		    ->title( "Blog app on homestead" )
+		    ->description( "Stupid shit here!" )
+		    ->url( 'http://blog.app:8000' )
 		    ->appendTo( $feed );
 
 		$articles = $this->article->getRecent(30);
@@ -154,7 +154,7 @@ class ContentController extends BaseController {
 
 			$item
 			    ->title( $article->title )
-			    ->url( 'http://fideloper.com/'.$article->url_title )
+			    ->url( 'http://blog.app:8000/'.$article->url_title )
 			    ->appendTo( $channel );
 
 			if($kind === 'full')
